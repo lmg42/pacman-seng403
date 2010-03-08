@@ -1,21 +1,5 @@
 ﻿using System;
 
-/*
- * Each entry of MapArray is a 4-Bit Code
- * Each digit of the code corresponds to a direction
- * xxxx = NESW (North-East-South-West) or URDL (Up-Right-Down-Left)
- * 
- * A "0" in one of the digit places means one cannot move in that direction from the current spot
- * A "1" in one of the digit places means one is able to move in that direction from the current spot
- * 
- * Example: 1001 means that one can move North or West from the current position
- *
- * 
- * Bit Codes are translated into hex for identification
- * 
- * Example: 1001 = 0x9
- * 
- */
 
 public enum Directions
 {
@@ -38,45 +22,48 @@ public enum Directions
 }
 
 
-class Map {    
-    
-    Directions[,] MapArray;
-    int rows = 0;
-    int columns = 0;
+class Map {
 
-    // Constructor for a Map object
-    // "preset" corresponds to a pre-made map layout
-    public Map(int preset) 
-    {
-        if (preset == 1)
-        {
-            rows = 10;
-            columns = 10;
-            MapArray = new Directions[rows, columns];
-            blankMap();
-            
-            horCarve(1, 1, 8);
-            horCarve(3, 1, 5);
-            horCarve(5, 1, 5);
-            verCarve(1, 1, 5);
-            verCarve(3, 1, 5);
-            verCarve(5, 1, 5);
-            verCarve(8, 1, 8);
-            horCarve(8, 8, 2);
-            verCarve(2, 8, 6);
-            horCarve(6, 5, 7);
-        }
-    }
+    static private Directions[,] MapArray;
+    static private int rows = 0;
+    static private int columns = 0;
 
     // Returns the value at a certain coordinate in MapArray
-    public Directions getMapEntry(int x, int y)
+    static public Directions getMapEntry(int x, int y)
     {
         return MapArray[x, y];
     }
 
+    // Generates a map based on a preset layout for the specified level
+    static public void GenerateMap(int level)
+    {
+        switch (level)
+        {
+            case 1:
+                rows = 10;
+                columns = 10;
+                MapArray = new Directions[rows, columns];
+                blankMap();
+
+                horCarve(1, 1, 8);
+                horCarve(3, 1, 5);
+                horCarve(5, 1, 5);
+                verCarve(1, 1, 5);
+                verCarve(3, 1, 5);
+                verCarve(5, 1, 5);
+                verCarve(8, 1, 8);
+                horCarve(8, 8, 2);
+                verCarve(2, 8, 6);
+                horCarve(6, 5, 7);
+                break;
+            default:
+                break;
+        }
+    }
+
     // Prints the "walls" of the map to console
     // Useful to see hallway stucture
-    public void printBoundaries()
+    static public void printBoundaries()
     {
         int i;
         int j;
@@ -100,7 +87,7 @@ class Map {
 
     // Prints the MapArray entry of open spaces (as in, not walls)
     // Useful to see if spaces connect properly
-    public void printPathLogic()
+    static public void printPathLogic()
     {
         int i;
         int j;
@@ -123,7 +110,7 @@ class Map {
     }
 
     // printBoundaries() and printPathLogic() together
-    public void printAll()
+    static public void printAll()
     {
         int i;
         int j;
@@ -147,7 +134,7 @@ class Map {
     }
 
     // Converts map into entirely walls / impassable spaces
-    private void blankMap()
+    static private void blankMap()
     {
         int i;
         int j;
@@ -161,7 +148,7 @@ class Map {
     }
 
     // Carves a horizontal hallway into map
-    private void horCarve(int row, int y1, int y2)
+    static private void horCarve(int row, int y1, int y2)
     {
         if (y1 > y2)
         {
@@ -213,7 +200,7 @@ class Map {
     }
 
     // Carves a vertical hallway into map
-    private void verCarve(int column, int x1, int x2)
+    static private void verCarve(int column, int x1, int x2)
     {
         if (x1 > x2)
         {
