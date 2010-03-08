@@ -4,9 +4,9 @@ class TestMap {
 
     public static void Main(string[] args) 
     {
-        Map M = new Map(1);
-        M.printBoundaries();
-        M.printPathLogic();
-        M.printAll();
+        Map.GenerateMap(1);
+        Map.printBoundaries();
+        Map.printPathLogic();
+        Map.printAll();
     }
 }
