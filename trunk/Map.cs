@@ -35,7 +35,7 @@ class Map {
     }
 
     // Generates a map based on a preset layout for the specified level
-    static public Directions[,] GenerateMap(int level)
+    static public void GenerateMap(int level)
     {
         switch (level)
         {
@@ -56,10 +56,8 @@ class Map {
                 verCarve(2, 8, 6);
                 horCarve(6, 5, 7);
 			
-		return MapArray;
                 break;
             default:
-			return null;
                 break;
         }
     }
