@@ -106,8 +106,7 @@ public class Drawer{
 				}
 			}//end if(showMenu == true)
 			else{
-				Assembly asm = Assembly.GetExecutingAssembly();
-				Bitmap backgroundImage = new Bitmap(asm.GetManifestResourceStream("PacmanLayoutWalls.jpg"));
+				Bitmap backgroundImage = GroupTest.Properties.Resources.PacmanLayoutWalls;
 				e.Graphics.DrawImage(backgroundImage, this.ClientRectangle,
 				                     new Rectangle(0,0, backgroundImage.Width, backgroundImage.Height),
 				                     GraphicsUnit.Pixel);
