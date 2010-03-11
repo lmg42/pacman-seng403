@@ -40,11 +40,41 @@ class Map {
         switch (level)
         {
             case 1:
+                rows = 50;
+                columns = 50;
+                MapArray = new Directions[rows, columns];
+                blankMap();
+                horCarve(10, 10, 39);
+                verCarve(10, 10, 39);
+                horCarve(39, 10, 39);
+                verCarve(39, 10, 39);
+                horCarve(16, 10, 39);
+                horCarve(22, 10, 39);
+                horCarve(27, 10, 39);
+                horCarve(33, 10, 39);
+                verCarve(16, 10, 16);
+                verCarve(33, 10, 16);
+                verCarve(20, 16, 21);
+                verCarve(29, 16, 21);
+                verCarve(20, 28, 33);
+                verCarve(29, 28, 33);
+                verCarve(16, 34, 39);
+                verCarve(33, 34, 39);
+                horCarve(13, 17, 33);
+                horCarve(36, 17, 33);
+                verCarve(16, 22, 26);
+                verCarve(33, 22, 26);
+
+                verCarve(24, 22, 24);
+                verCarve(25, 22, 24);
+                horCarve(24, 22, 27);
+                horCarve(25, 22, 27);
+                break;
+            case 2:
                 rows = 10;
                 columns = 10;
                 MapArray = new Directions[rows, columns];
                 blankMap();
-
                 horCarve(1, 1, 8);
                 horCarve(3, 1, 5);
                 horCarve(5, 1, 5);
@@ -55,7 +85,6 @@ class Map {
                 horCarve(8, 8, 2);
                 verCarve(2, 8, 6);
                 horCarve(6, 5, 7);
-			
                 break;
             default:
                 break;

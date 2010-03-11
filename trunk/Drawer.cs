@@ -3,6 +3,7 @@
 using System;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Threading;
 using System.Reflection;
 
@@ -12,6 +13,7 @@ public class Drawer{
 	private static KeyEventArgs keyCheck = new KeyEventArgs(new Keys());
 	private static bool debugMenu = false;
 	private static bool debugGame = true;
+    
 	
 	public class AForm:Form{
 		
@@ -32,10 +34,11 @@ public class Drawer{
 		
 		static void Main(){
 			keyboardInputThread = new Thread(new ThreadStart(checkForInput));
-			keyboardInputThread.Start();
+            keyboardInputThread.Start();
 			AForm form = new AForm();
 			form.Activate();
 			Application.Run(form);
+            
 		}
 		
 		protected override void OnPaint(PaintEventArgs e){
@@ -51,7 +54,7 @@ public class Drawer{
 				e.Graphics.DrawLine(new Pen(Color.Beige, 1), new Point(0,500), new Point(500,500));
 				e.Graphics.DrawLine(new Pen(Color.Beige, 1), new Point(500,500), new Point(500,0));
 				e.Graphics.DrawLine(new Pen(Color.Beige, 1), new Point(500,0), new Point(0,0));
-			
+
 				//TEST AREA -- DRAWING MENU OPTION
 				e.Graphics.DrawEllipse(new Pen(Color.Yellow, 5), 175, 353, 10, 10);
 				if(firstTime == true){
@@ -106,10 +109,16 @@ public class Drawer{
 				}
 			}//end if(showMenu == true)
 			else{
-				Bitmap backgroundImage = GroupTest.Properties.Resources.PacmanLayoutWalls;
-				e.Graphics.DrawImage(backgroundImage, this.ClientRectangle,
-				                     new Rectangle(0,0, backgroundImage.Width, backgroundImage.Height),
-				                     GraphicsUnit.Pixel);
+                //Form.ActiveForm.Refresh();
+                //Bitmap backgroundImage = GroupTest.Properties.Resources.PacmanLayoutWalls;
+				//e.Graphics.DrawImage(backgroundImage, this.ClientRectangle, new Rectangle(0,0, backgroundImage.Width, backgroundImage.Height), GraphicsUnit.Pixel);
+                
+                Graphics g = this.CreateGraphics();
+                Matrix X = new Matrix();
+                X.Translate(50, 200);
+                g.Transform = X;
+                g.DrawEllipse(new Pen(Color.Yellow, 8), 115, 115, 1, 1);
+
 
 				/*Directions[,] MapArray = Map.GenerateMap(1);
 				for(int x = 0; x <= 10; x++){
@@ -229,20 +238,20 @@ public class Drawer{
 			cursorDown = false;
 			cursorUp = false;
 			while(!enterPushed){
-				Console.Write("Inside while loop\n");
-				Console.Write("keyCheck value is {0}\n", keyCheck.KeyCode);
+				//Console.Write("Inside while loop\n");
+				//Console.Write("keyCheck value is {0}\n", keyCheck.KeyCode);
 				if(keyCheck.KeyCode == Keys.Enter){
-					Console.Write("Inside if -- enter has been pushed\n");
+					//Console.Write("Inside if -- enter has been pushed\n");
 					enterPushed = true;
 				}
 				else{
-					Console.Write("Inside else\n");
+					//Console.Write("Inside else\n");
 					if(keyCheck.KeyCode == Keys.Down){
-						Console.Write("Inside if -- up key has been pushed\n");
+						//Console.Write("Inside if -- up key has been pushed\n");
 						cursorDown = true;
 					}
 					else if(keyCheck.KeyCode == Keys.Up){
-						Console.Write("Inside else if -- up key has been pushed\n");
+						//Console.Write("Inside else if -- up key has been pushed\n");
 						cursorUp = true;
 					}
 				}
@@ -252,6 +261,7 @@ public class Drawer{
 				catch(Exception e){
 					Console.Write("Exception: {0}", e);
 				}
+                /*
 				if(enterPushed)
 					Console.Write("Enter is true\n");
 				else
@@ -263,7 +273,7 @@ public class Drawer{
 				if(cursorUp)
 					Console.Write("Cursor up is true\n");
 				else
-					Console.Write("Cursor up is false\n");
+					Console.Write("Cursor up is false\n"); */
 				Thread.Sleep(1000);
 			}
 		}
