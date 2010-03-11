@@ -12,7 +12,7 @@ namespace pacman
 		}
 		
 		public void screenUpdate() {
-            int mapCurrentPosition = Map.getMayEntry(x/10, y/10);
+            int mapCurrentPosition = Map.getMapEntry(x/10, y/10);
             if (direction == 'u') {
                 if ((mapCurrentPosition & (int)Directions.UP) == (int)Directions.UP) {
                     move(direction);
