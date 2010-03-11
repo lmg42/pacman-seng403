@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
+using pacman;
 
 namespace SENG403GroupProject2010
 {
