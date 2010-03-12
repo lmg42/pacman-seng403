@@ -12,17 +12,17 @@ namespace pacman
 		}
 		
 		public void screenUpdate() {
-            int mapCurrentPosition = (int)Map.getMapEntry((int)x/10, (int)y/10);
+            int mapCurrentPosition = Map.getMayEntry((int)x/10, (int)y/10);
             if (direction == 'u') {
-                if ((mapCurrentPosition & (int)Directions.UP) == (int)Directions.UP) {
-                    move(direction);
-                }
-                else if ((mapCurrentPosition & (int)Directions.RIGHT) == (int)Directions.RIGHT) {
+                if ((mapCurrentPosition & (int)Directions.RIGHT) == (int)Directions.RIGHT) {
                     direction = 'r';
                     move(direction);
                 }
                 else if ((mapCurrentPosition & (int)Directions.LEFT) == (int)Directions.LEFT) {
                     direction = 'l';
+                    move(direction);
+                }
+		else if ((mapCurrentPosition & (int)Directions.UP) == (int)Directions.UP) {
                     move(direction);
                 }
                 else if ((mapCurrentPosition & (int)Directions.DOWN) == (int)Directions.DOWN) {
@@ -31,15 +31,15 @@ namespace pacman
                 }
             }
             else if (direction == 'd') {
-                if ((mapCurrentPosition & (int)Directions.DOWN) == (int)Directions.DOWN) {
-                    move(direction);
-                }
-                else if ((mapCurrentPosition & (int)Directions.RIGHT) == (int)Directions.RIGHT) {
+                if ((mapCurrentPosition & (int)Directions.RIGHT) == (int)Directions.RIGHT) {
                     direction = 'r';
                     move(direction);
                 }
                 else if ((mapCurrentPosition & (int)Directions.LEFT) == (int)Directions.LEFT) {
                     direction = 'l';
+                    move(direction);
+                }
+                else if ((mapCurrentPosition & (int)Directions.DOWN) == (int)Directions.DOWN) {
                     move(direction);
                 }
                 else if ((mapCurrentPosition & (int)Directions.UP) == (int)Directions.UP) {
@@ -48,15 +48,15 @@ namespace pacman
                 }
             }
             else if (direction == 'l') {
-                if ((mapCurrentPosition & (int)Directions.LEFT) == (int)Directions.LEFT) {
-                    move(direction);
-                }
-                else if ((mapCurrentPosition & (int)Directions.UP) == (int)Directions.UP) {
+                if ((mapCurrentPosition & (int)Directions.UP) == (int)Directions.UP) {
                     direction = 'u';
                     move(direction);
                 }
                 else if ((mapCurrentPosition & (int)Directions.DOWN) == (int)Directions.DOWN) {
                     direction = 'd';
+                    move(direction);
+                }
+                else if ((mapCurrentPosition & (int)Directions.LEFT) == (int)Directions.LEFT) {
                     move(direction);
                 }
                 else if ((mapCurrentPosition & (int)Directions.RIGHT) == (int)Directions.RIGHT) {
@@ -65,15 +65,15 @@ namespace pacman
                 }
             }
             else if (direction == 'r') {
-                if ((mapCurrentPosition & (int)Directions.RIGHT) == (int)Directions.RIGHT) {
-                    move(direction);
-                }
-                else if ((mapCurrentPosition & (int)Directions.UP) == (int)Directions.UP) {
+                if ((mapCurrentPosition & (int)Directions.UP) == (int)Directions.UP) {
                     direction = 'u';
                     move(direction);
                 }
                 else if ((mapCurrentPosition & (int)Directions.DOWN) == (int)Directions.DOWN) {
                     direction = 'd';
+                    move(direction);
+                }
+                else if ((mapCurrentPosition & (int)Directions.RIGHT) == (int)Directions.RIGHT) {
                     move(direction);
                 }
                 else if ((mapCurrentPosition & (int)Directions.LEFT) == (int)Directions.LEFT) {
@@ -101,7 +101,8 @@ namespace pacman
                 }
                 else {
                     //ERROR - ghost is in a wall
-
+		    //reset position to center
+		    
                 }
             }
             return;
