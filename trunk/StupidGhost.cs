@@ -1,18 +1,20 @@
 
 using System;
 
-namespace pacman
+namespace pacman_seng403
 {
 	
 	
 	public class StupidGhost: Ghost
 	{
-		public StupidGhost() {
+        public StupidGhost(int start_x, int start_y) {
+            x = start_x;
+            y = start_y;
             direction = 'u'; //starting direction is up
 		}
 		
 		public void screenUpdate() {
-            int mapCurrentPosition = Map.getMayEntry((int)x/10, (int)y/10);
+            int mapCurrentPosition = (int)Map.getMapEntry((int)x/10, (int)y/10);
             if (direction == 'u') {
                 if ((mapCurrentPosition & (int)Directions.RIGHT) == (int)Directions.RIGHT) {
                     direction = 'r';
@@ -22,7 +24,7 @@ namespace pacman
                     direction = 'l';
                     move(direction);
                 }
-		else if ((mapCurrentPosition & (int)Directions.UP) == (int)Directions.UP) {
+	    	else if ((mapCurrentPosition & (int)Directions.UP) == (int)Directions.UP) {
                     move(direction);
                 }
                 else if ((mapCurrentPosition & (int)Directions.DOWN) == (int)Directions.DOWN) {
@@ -101,8 +103,9 @@ namespace pacman
                 }
                 else {
                     //ERROR - ghost is in a wall
-		    //reset position to center
-		    
+		            //reset position to center
+		            x = 250;
+                    y = 250;
                 }
             }
             return;

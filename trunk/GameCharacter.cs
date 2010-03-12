@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace pacman
+namespace pacman_seng403
 {
     public abstract class GameCharacter
     {
