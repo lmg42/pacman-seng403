@@ -16,22 +16,22 @@ namespace pacman_seng403
 
         protected void move(char dir) {
             if (dir == 'u') {
-                x = (double)(((int)x) / 10 + 5);
+                x = (double)((((int)x) / 10)*10 + 5);
                 y -= SPEED;
                 return;
             }
             else if (dir == 'd') {
-                x = (double)(((int)x) / 10 + 5);
+                x = (double)((((int)x) / 10)*10 + 5);
                 y += SPEED;
                 return;
             }
             else if (dir == 'l') {
-                y = (double)(((int)y) / 10 + 5);
+                y = (double)((((int)y) / 10)*10 + 5);
                 x -= SPEED;
                 return;
             }
             else if (dir == 'r') {
-                y = (double)(((int)y) / 10 + 5);
+                y = (double)((((int)y) / 10)*10 + 5);
                 x += SPEED;
                 return;
             }
