@@ -50,6 +50,7 @@
     <Compile Include="Directions.cs" />
     <Compile Include="Drawer.cs" />
     <Compile Include="GameCharacter.cs" />
+    <Compile Include="GameData.cs" />
     <Compile Include="Ghost.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="MyPacman.cs" />

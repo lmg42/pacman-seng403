@@ -63,8 +63,10 @@ namespace pacman
         public Boolean getGameStatus() {
             return gameDone;
         }
-
+        /*
         static void Main() {
         }
+         */
     }
+         
 }
