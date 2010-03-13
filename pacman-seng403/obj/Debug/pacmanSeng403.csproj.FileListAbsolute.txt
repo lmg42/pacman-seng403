@@ -1,0 +1,7 @@
+C:\Users\David\Documents\Visual Studio 2008\Projects\pacman-seng403\pacman-seng403\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\David\Documents\Visual Studio 2008\Projects\pacman-seng403\pacman-seng403\obj\Debug\pacmanSeng403.csproj.GenerateResource.Cache
+C:\Users\David\Documents\Visual Studio 2008\Projects\pacman-seng403\pacman-seng403\bin\Debug\pacmanSeng403.exe
+C:\Users\David\Documents\Visual Studio 2008\Projects\pacman-seng403\pacman-seng403\bin\Debug\pacmanSeng403.pdb
+C:\Users\David\Documents\Visual Studio 2008\Projects\pacman-seng403\pacman-seng403\obj\Debug\pacmanSeng403.Properties.Resources.resources
+C:\Users\David\Documents\Visual Studio 2008\Projects\pacman-seng403\pacman-seng403\obj\Debug\pacmanSeng403.exe
+C:\Users\David\Documents\Visual Studio 2008\Projects\pacman-seng403\pacman-seng403\obj\Debug\pacmanSeng403.pdb
