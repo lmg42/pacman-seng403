@@ -8,13 +8,13 @@ namespace pacman
 	public class StupidGhost: Ghost
 	{
         public StupidGhost(int start_x, int start_y, char dir) {
-            x = start_x*10 + 5;
-            y = start_y*10 + 5;
-            direction = dir; //starting direction is up
+            x = start_x*Map.BLOCKSIZE + 5;
+            y = start_y*Map.BLOCKSIZE + 5;
+            direction = dir;
 		}
 		
 		public void screenUpdate() {
-            int mapCurrentPosition = (int)Map.getMapEntry((int)x/10, (int)y/10);
+            int mapCurrentPosition = (int)Map.getMapEntry((int)x/Map.BLOCKSIZE, (int)y/Map.BLOCKSIZE);
             if (direction == 'u') {
                 if ((mapCurrentPosition & (int)Directions.UP) == (int)Directions.UP) {
                     move(direction);
@@ -107,6 +107,7 @@ namespace pacman
 		            //reset position to center
 		            x = 250;
                     y = 250;
+                    direction = 'u';
                 }
             }
             return;
