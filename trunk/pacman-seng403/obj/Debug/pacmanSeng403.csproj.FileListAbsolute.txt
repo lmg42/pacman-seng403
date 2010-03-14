@@ -5,3 +5,10 @@ C:\Users\David\Documents\Visual Studio 2008\Projects\pacman-seng403\pacman-seng4
 C:\Users\David\Documents\Visual Studio 2008\Projects\pacman-seng403\pacman-seng403\obj\Debug\pacmanSeng403.Properties.Resources.resources
 C:\Users\David\Documents\Visual Studio 2008\Projects\pacman-seng403\pacman-seng403\obj\Debug\pacmanSeng403.exe
 C:\Users\David\Documents\Visual Studio 2008\Projects\pacman-seng403\pacman-seng403\obj\Debug\pacmanSeng403.pdb
+E:\seng403\pacman\googlecode\pacman-seng403\pacman-seng403\obj\Debug\pacmanSENG403.exe
+E:\seng403\pacman\googlecode\pacman-seng403\pacman-seng403\obj\Debug\pacmanSENG403.pdb
+E:\seng403\pacman\googlecode\pacman-seng403\pacman-seng403\bin\Debug\pacmanSENG403.exe
+E:\seng403\pacman\googlecode\pacman-seng403\pacman-seng403\bin\Debug\pacmanSENG403.pdb
+E:\seng403\pacman\googlecode\pacman-seng403\pacman-seng403\obj\Debug\ResolveAssemblyReference.cache
+E:\seng403\pacman\googlecode\pacman-seng403\pacman-seng403\obj\Debug\pacmanSENG403.Properties.Resources.resources
+E:\seng403\pacman\googlecode\pacman-seng403\pacman-seng403\obj\Debug\pacmanSENG403.csproj.GenerateResource.Cache

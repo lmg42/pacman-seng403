@@ -2,6 +2,7 @@
 
 
 class Map {
+    public static readonly int BLOCKSIZE = 10;
 
     static private Directions[,] MapArray;
     static private int rows = 0;
