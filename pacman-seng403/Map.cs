@@ -3,7 +3,7 @@
 namespace pacman
 {
 
-    class Map
+    public class Map
     {
         public static readonly int BLOCKSIZE = 10;
 
