@@ -34,8 +34,14 @@ namespace pacman
             private Graphics g_pacman = null;
             private MyPacman player = null;
 
+            private Graphics g_blinky = null;
+            private StupidGhost blinky = null;
+            private Graphics g_pinky = null;
+            private StupidGhost pinky = null;
             private Graphics g_inky = null;
             private StupidGhost inky = null;
+            private Graphics g_clyde = null;
+            private StupidGhost clyde = null;
 
 
             //Creates basic window - 'Pacman' will be in the title bar, size is Size, and 
@@ -186,13 +192,48 @@ namespace pacman
                     
 
                     // Ghost Movement
+                    //blinky (red)
+                    if (g_blinky == null)
+                    {
+                        Map.printBoundaries();
+                        Map.printPathLogic();
+                        blinky = new StupidGhost(10, 10, 'u');
+                        g_blinky = this.CreateGraphics();
+                        g_blinky.DrawEllipse(new Pen(Color.Red, 6), blinky.getX(), blinky.getY(), 1, 1);
+                    }
+                    else
+                    {
+                        int oldx = blinky.getX();
+                        int oldy = blinky.getY();
+                        blinky.screenUpdate();
+                        g_blinky.DrawEllipse(new Pen(Color.White, 6), oldx, oldy, 1, 1);
+                        g_blinky.DrawEllipse(new Pen(Color.Red, 6), blinky.getX(), blinky.getY(), 1, 1);
+                    }
+                    //pinky (pink)
+                    if (g_pinky == null)
+                    {
+                        Map.printBoundaries();
+                        Map.printPathLogic();
+                        pinky = new StupidGhost(39, 10, 'u');
+                        g_pinky = this.CreateGraphics();
+                        g_pinky.DrawEllipse(new Pen(Color.Crimson, 6), pinky.getX(), pinky.getY(), 1, 1);
+                    }
+                    else
+                    {
+                        int oldx = pinky.getX();
+                        int oldy = pinky.getY();
+                        pinky.screenUpdate();
+                        g_pinky.DrawEllipse(new Pen(Color.White, 6), oldx, oldy, 1, 1);
+                        g_pinky.DrawEllipse(new Pen(Color.Crimson, 6), pinky.getX(), pinky.getY(), 1, 1);
+                    }
+                    //inky (blue)
                     if (g_inky == null)
                     {
                         Map.printBoundaries();
                         Map.printPathLogic();
                         inky = new StupidGhost(24, 24, 'u');
                         g_inky = this.CreateGraphics();
-                        g_inky.DrawEllipse(new Pen(Color.Red, 6), inky.getX(), inky.getY(), 1, 1);
+                        g_inky.DrawEllipse(new Pen(Color.Blue, 6), inky.getX(), inky.getY(), 1, 1);
                     }
                     else
                     {
@@ -200,8 +241,25 @@ namespace pacman
                         int oldy = inky.getY();
                         inky.screenUpdate();
                         g_inky.DrawEllipse(new Pen(Color.White, 6), oldx, oldy, 1, 1);
-                        g_inky.DrawEllipse(new Pen(Color.Red, 6), inky.getX(), inky.getY(), 1, 1);
+                        g_inky.DrawEllipse(new Pen(Color.Blue, 6), inky.getX(), inky.getY(), 1, 1);
                     }
+                    //clyde (orange)
+                    /*if (g_clyde == null)
+                    {
+                        Map.printBoundaries();
+                        Map.printPathLogic();
+                        clyde = new StupidGhost(39, 25, 'u');
+                        g_clyde = this.CreateGraphics();
+                        g_clyde.DrawEllipse(new Pen(Color.Orange, 6), clyde.getX(), clyde.getY(), 1, 1);
+                    }
+                    else
+                    {
+                        int oldx = clyde.getX();
+                        int oldy = clyde.getY();
+                        pinky.screenUpdate();
+                        g_clyde.DrawEllipse(new Pen(Color.White, 6), oldx, oldy, 1, 1);
+                        g_clyde.DrawEllipse(new Pen(Color.Orange, 6), clyde.getX(), clyde.getY(), 1, 1);
+                    }*/
                 }
 
             }
