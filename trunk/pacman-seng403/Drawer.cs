@@ -195,8 +195,6 @@ namespace pacman
                     //blinky (red)
                     if (g_blinky == null)
                     {
-                        Map.printBoundaries();
-                        Map.printPathLogic();
                         blinky = new StupidGhost(10, 10, 'u');
                         g_blinky = this.CreateGraphics();
                         g_blinky.DrawEllipse(new Pen(Color.Red, 6), blinky.getX(), blinky.getY(), 1, 1);
@@ -212,8 +210,6 @@ namespace pacman
                     //pinky (pink)
                     if (g_pinky == null)
                     {
-                        Map.printBoundaries();
-                        Map.printPathLogic();
                         pinky = new StupidGhost(39, 10, 'u');
                         g_pinky = this.CreateGraphics();
                         g_pinky.DrawEllipse(new Pen(Color.Crimson, 6), pinky.getX(), pinky.getY(), 1, 1);
@@ -229,8 +225,6 @@ namespace pacman
                     //inky (blue)
                     if (g_inky == null)
                     {
-                        Map.printBoundaries();
-                        Map.printPathLogic();
                         inky = new StupidGhost(24, 24, 'u');
                         g_inky = this.CreateGraphics();
                         g_inky.DrawEllipse(new Pen(Color.Blue, 6), inky.getX(), inky.getY(), 1, 1);
