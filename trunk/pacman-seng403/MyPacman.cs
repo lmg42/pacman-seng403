@@ -139,7 +139,11 @@ namespace pacman
         {
             return y;
         }
-        
+        public Directions getPacmanTowarding()
+        {
+            return pacmanTowarding;
+        }
+
         public static bool CheckCollision(GameCharacter a, GameCharacter b)
         {
             double XDifference;
