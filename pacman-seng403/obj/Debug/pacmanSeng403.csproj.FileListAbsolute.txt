@@ -19,3 +19,10 @@ C:\Documents and Settings\Lisa\pacman-seng403\pacman-seng403\obj\Debug\pacmanSEN
 C:\Documents and Settings\Lisa\pacman-seng403\pacman-seng403\obj\Debug\pacmanSENG403.csproj.GenerateResource.Cache
 C:\Documents and Settings\Lisa\pacman-seng403\pacman-seng403\bin\Debug\pacmanSENG403.exe
 C:\Documents and Settings\Lisa\pacman-seng403\pacman-seng403\bin\Debug\pacmanSENG403.pdb
+F:\seng403\pacman\googlecode\pacman-seng403\pacman-seng403\obj\Debug\pacmanSENG403.exe
+F:\seng403\pacman\googlecode\pacman-seng403\pacman-seng403\obj\Debug\pacmanSENG403.pdb
+F:\seng403\pacman\googlecode\pacman-seng403\pacman-seng403\bin\Debug\pacmanSENG403.exe
+F:\seng403\pacman\googlecode\pacman-seng403\pacman-seng403\bin\Debug\pacmanSENG403.pdb
+F:\seng403\pacman\googlecode\pacman-seng403\pacman-seng403\obj\Debug\ResolveAssemblyReference.cache
+F:\seng403\pacman\googlecode\pacman-seng403\pacman-seng403\obj\Debug\pacmanSENG403.Properties.Resources.resources
+F:\seng403\pacman\googlecode\pacman-seng403\pacman-seng403\obj\Debug\pacmanSENG403.csproj.GenerateResource.Cache
