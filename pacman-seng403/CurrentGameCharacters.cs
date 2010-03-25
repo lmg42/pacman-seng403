@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace pacmanSENG403
+namespace pacman
 {
     class CurrentGameCharacters
     {
@@ -13,11 +13,12 @@ namespace pacmanSENG403
         public static Ghost blinky;
         public static Ghost pinky;
         public static Ghost clyde;
-
+/*
         public static List<Edibles> dots_topright = new List<Edibles>();
         public static List<Edibles> dots_topleft = new List<Edibles>();
         public static List<Edibles> dots_bottomright = new List<Edibles>();
         public static List<Edibles> dots_bottomleft = new List<Edibles>();
         public static List<Edibles> bigdots = new List<Edibles>();
+ */
     }
 }
