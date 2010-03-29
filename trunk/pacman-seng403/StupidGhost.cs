@@ -13,7 +13,7 @@ namespace pacman
             direction = dir;
 		}
 		
-		public void screenUpdate() {
+		public override void screenUpdate() {
             int mapCurrentPosition = (int)Map.getMapEntry((int)x/Map.BLOCKSIZE, (int)y/Map.BLOCKSIZE);
             if (direction == 'u') {
                 if ((mapCurrentPosition & (int)Directions.UP) == (int)Directions.UP) {
