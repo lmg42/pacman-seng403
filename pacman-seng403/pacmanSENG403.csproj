@@ -61,6 +61,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SmartGhost.cs" />
     <Compile Include="StupidGhost.cs" />
   </ItemGroup>
   <ItemGroup>

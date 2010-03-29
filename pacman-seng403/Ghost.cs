@@ -14,6 +14,8 @@ namespace pacman
 			radius = 4;
 		}
 
+        public abstract void screenUpdate();
+
         protected void move(char dir) {
             if (dir == 'u') {
                 x = (double)((((int)x) / 10)*10 + 5);
