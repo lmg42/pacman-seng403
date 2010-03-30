@@ -28,3 +28,8 @@ F:\seng403\pacman\googlecode\pacman-seng403\pacman-seng403\obj\Debug\pacmanSENG4
 F:\seng403\pacman\googlecode\pacman-seng403\pacman-seng403\obj\Debug\pacmanSENG403.csproj.GenerateResource.Cache
 G:\seng403\pacman\googlecode\pacman-seng403\pacman-seng403\obj\Debug\pacmanSENG403.exe
 G:\seng403\pacman\googlecode\pacman-seng403\pacman-seng403\obj\Debug\pacmanSENG403.pdb
+G:\seng403\pacman\googlecode\pacman-seng403\pacman-seng403\bin\Debug\pacmanSENG403.exe
+G:\seng403\pacman\googlecode\pacman-seng403\pacman-seng403\bin\Debug\pacmanSENG403.pdb
+G:\seng403\pacman\googlecode\pacman-seng403\pacman-seng403\obj\Debug\ResolveAssemblyReference.cache
+G:\seng403\pacman\googlecode\pacman-seng403\pacman-seng403\obj\Debug\pacmanSENG403.Properties.Resources.resources
+G:\seng403\pacman\googlecode\pacman-seng403\pacman-seng403\obj\Debug\pacmanSENG403.csproj.GenerateResource.Cache

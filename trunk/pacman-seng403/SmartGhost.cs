@@ -25,8 +25,24 @@ namespace pacman
             }
 
             //move ghost in direction closest to pacman
-            if (((dirtopacman & Directions.UP) == Directions.UP) && mapCurrentPosition ) {
-
+            if (((dirtopacman & Directions.RIGHT) == Directions.RIGHT) && ((mapCurrentPosition & Directions.RIGHT) == Directions.RIGHT)) {
+                direction = Directions.RIGHT;
+                move(direction);
+            }
+            else if (((dirtopacman & Directions.LEFT) == Directions.LEFT) && ((mapCurrentPosition & Directions.LEFT) == Directions.LEFT)) {
+                direction = Directions.LEFT;
+                move(direction);
+            }
+            else if (((dirtopacman & Directions.UP) == Directions.UP) && ((mapCurrentPosition & Directions.UP) == Directions.UP)) {
+                direction = Directions.UP;
+                move(direction);
+            }
+            else if (((dirtopacman & Directions.DOWN) == Directions.DOWN) && ((mapCurrentPosition & Directions.DOWN) == Directions.DOWN)) {
+                direction = Directions.DOWN;
+                move(direction);
+            }
+            else { //cant move toward pacman
+                
             }
         }
     }
