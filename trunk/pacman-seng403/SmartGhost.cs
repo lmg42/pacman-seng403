@@ -9,6 +9,7 @@ namespace pacman
     {
         public override void screenUpdate() {
             //find direction to pacman
+            Directions mapCurrentPosition = Map.getMapEntry((int)x/Map.BLOCKSIZE, (int)y/Map.BLOCKSIZE);
             Directions dirtopacman = Directions.NONE;
             if (CurrentGameCharacters.pacman.getX() < this.x) {
                 dirtopacman = Directions.LEFT;
@@ -23,7 +24,10 @@ namespace pacman
                 dirtopacman = (dirtopacman | Directions.DOWN);
             }
 
+            //move ghost in direction closest to pacman
+            if (((dirtopacman & Directions.UP) == Directions.UP) && mapCurrentPosition ) {
 
+            }
         }
     }
 }
