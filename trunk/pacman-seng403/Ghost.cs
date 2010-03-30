@@ -34,7 +34,7 @@ namespace pacman
                 return;
             }
             else if (dir == Directions.RIGHT) {
-                y = (double)((((int)y) / Map.BLOCKSIZE)*Map.BLOCKSIZE + (Map.BLOCKSIZE));
+                y = (double)((((int)y) / Map.BLOCKSIZE)*Map.BLOCKSIZE + (Map.BLOCKSIZE/2));
                 x += SPEED;
                 return;
             }
