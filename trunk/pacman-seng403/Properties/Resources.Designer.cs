@@ -60,6 +60,13 @@ namespace pacmanSENG403.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap pacman {
+            get {
+                object obj = ResourceManager.GetObject("pacman", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap PacmanLayoutWalls {
             get {
                 object obj = ResourceManager.GetObject("PacmanLayoutWalls", resourceCulture);
