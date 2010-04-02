@@ -33,6 +33,7 @@ namespace pacman
 
             private Graphics g_pacman = null;
             private Bitmap b_pacman = null;
+            private Bitmap b_pacman = null;
 
             private Graphics g_blinky = null;
             private Graphics g_pinky = null;
@@ -195,7 +196,7 @@ namespace pacman
 
                     // Ghost Movement
                     //blinky (red)
-                    if (g_blinky == null)
+                    /*if (g_blinky == null)
                     {
                         CurrentGameCharacters.blinky = new StupidGhost(1, 1, Directions.UP);
                         g_blinky = this.CreateGraphics();
@@ -240,7 +241,7 @@ namespace pacman
                         CurrentGameCharacters.inky.screenUpdate();
                         g_inky.DrawEllipse(new Pen(Color.Black, 6), oldx, oldy, 5, 5);
                         g_inky.DrawEllipse(new Pen(Color.Blue, 6), CurrentGameCharacters.inky.getX(), CurrentGameCharacters.inky.getY(), 5, 5);
-                    }
+                    }*/
                     
                     //clyde (orange)
                     if (g_clyde == null)
