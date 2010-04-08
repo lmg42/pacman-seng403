@@ -11,7 +11,7 @@ namespace pacman
     //Each element is an integer whose first 4 LSB contain the possible moving directions for the pacman.
     public class MyPacman : GameCharacter
     {
-        protected const int BLOCKSIZE = 10; //unit is pixel
+        protected const int BLOCKSIZE = 20; //unit is pixel
 
         private int userInputXDeriction;
         private int userInputYDeriction;
@@ -42,6 +42,7 @@ namespace pacman
 
         public void UserInput(KeyEventArgs e)
         {
+
             switch (e.KeyCode)
             {
                 case Keys.Left:
@@ -68,8 +69,8 @@ namespace pacman
         {
             
             //Assume in a 10 by 10 block the centre of the pacman is (5,5)
-            int pacmanBlockXOrigin = x - 5;
-            int pacmanBlockYOrigin = y - 5;
+            int pacmanBlockXOrigin = x - 10;
+            int pacmanBlockYOrigin = y - 10;
 
             Directions elementInfo = 0;
             //User inputs a reverse direction. It doesn't matter where the pacman is in the map. The deriction of pacman is reversed.
@@ -129,6 +130,7 @@ namespace pacman
 
             x = x + pacmanXDeriction; //update pacman position
             y = y + pacmanYDeriction;
+
         }
         public int getX()
         {
