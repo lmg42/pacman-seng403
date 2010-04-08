@@ -33,12 +33,13 @@ namespace pacman
 
             private Graphics g_pacman = null;
             private Bitmap b_pacman = null;
-            private Bitmap b_pacman = null;
-
+            
             private Graphics g_blinky = null;
             private Graphics g_pinky = null;
             private Graphics g_inky = null;
             private Graphics g_clyde = null;
+
+            private GameData gd = new GameData();
 
 
             //Creates basic window - 'Pacman' will be in the title bar, size is Size, and 
@@ -258,6 +259,20 @@ namespace pacman
                         g_clyde.DrawEllipse(new Pen(Color.Black, 6), oldx, oldy, 5, 5);
                         g_clyde.DrawEllipse(new Pen(Color.Orange, 6), CurrentGameCharacters.clyde.getX(), CurrentGameCharacters.clyde.getY(), 5, 5);
                     }
+
+                    //score
+                    e.Graphics.DrawString("Score: " + gd.getScore(), new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 2, 490);
+
+                    //lives left
+                    int tempLives = gd.getNumLives();
+                    if (tempLives == 1)
+                        e.Graphics.DrawString("1 life", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 225, 490);
+                    else
+                        e.Graphics.DrawString(tempLives+" lives", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 225, 490);
+                    
+                    //level
+                    e.Graphics.DrawString("Level " + gd.getLevel(), new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 440, 490);
+
                 }
 
             }
