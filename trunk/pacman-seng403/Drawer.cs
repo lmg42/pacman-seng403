@@ -164,17 +164,17 @@ namespace pacman
                     // Pacman Movement
                     if (g_pacman == null)
                     {
-                        CurrentGameCharacters.pacman = new MyPacman(245, 245);
+                        //CurrentGameCharacters.pacman = new MyPacman(250, 245);
                         //CurrentGameCharacters.pacman = new MyPacman(120, 90);
-                        g_pacman = this.CreateGraphics();
-                        b_pacman = pacmanSENG403.Properties.Resources.pacman;
-                        g_pacman.DrawImage(b_pacman, this.ClientRectangle, new Rectangle(CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 20, 20), GraphicsUnit.Pixel);
+                        //g_pacman = this.CreateGraphics();
+                        // b_pacman = pacmanSENG403.Properties.Resources.pacman;
+                        // g_pacman.DrawImage(b_pacman, this.ClientRectangle, new Rectangle(CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 20, 20), GraphicsUnit.Pixel);
 
-                        /*
-                        CurrentGameCharacters.pacman = new MyPacman(245, 245);
+                        
+                        CurrentGameCharacters.pacman = new MyPacman(250, 250);
                         g_pacman = this.CreateGraphics();
                         g_pacman.DrawEllipse(new Pen(Color.Yellow, 12), CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 1, 1);
-                         */
+                        
                         
                     }
                     
@@ -183,21 +183,21 @@ namespace pacman
                         int oldx = CurrentGameCharacters.pacman.getX();
                         int oldy = CurrentGameCharacters.pacman.getY();
                         CurrentGameCharacters.pacman.screenUpdate();
-                        
+                       
+                        /*
                         g_pacman.DrawRectangle(new Pen(Color.Black, 1), oldx, oldy, 20, 20);
                         g_pacman.FillRectangle(new SolidBrush(Color.Black), oldx, oldy, 20, 20);
                         g_pacman.DrawImage(b_pacman, this.ClientRectangle, new Rectangle(CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 20, 20), GraphicsUnit.Pixel);
-                        
-                        /*
-                        g_pacman.DrawEllipse(new Pen(Color.Black, 12), oldx, oldy, 1, 1);
-                        g_pacman.DrawEllipse(new Pen(Color.Yellow, 12), CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 1, 1
                         */
+                        
+                        g_pacman.DrawEllipse(new Pen(Color.Black, 12), oldx, oldy, 1, 1);
+                        g_pacman.DrawEllipse(new Pen(Color.Yellow, 12), CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 1, 1);
                     }     
        
 
                     // Ghost Movement
                     //blinky (red)
-                    /*if (g_blinky == null)
+                    if (g_blinky == null)
                     {
                         CurrentGameCharacters.blinky = new StupidGhost(1, 1, Directions.UP);
                         g_blinky = this.CreateGraphics();
@@ -242,7 +242,7 @@ namespace pacman
                         CurrentGameCharacters.inky.screenUpdate();
                         g_inky.DrawEllipse(new Pen(Color.Black, 6), oldx, oldy, 5, 5);
                         g_inky.DrawEllipse(new Pen(Color.Blue, 6), CurrentGameCharacters.inky.getX(), CurrentGameCharacters.inky.getY(), 5, 5);
-                    }*/
+                    }
                     
                     //clyde (orange)
                     if (g_clyde == null)
@@ -261,17 +261,17 @@ namespace pacman
                     }
 
                     //score
-                    e.Graphics.DrawString("Score: " + gd.getScore(), new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 2, 490);
+                    e.Graphics.DrawString("Score: " + gd.getScore(), new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 2, 480);
 
                     //lives left
                     int tempLives = gd.getNumLives();
                     if (tempLives == 1)
-                        e.Graphics.DrawString("1 life", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 225, 490);
+                        e.Graphics.DrawString("1 life", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 225, 480);
                     else
-                        e.Graphics.DrawString(tempLives+" lives", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 225, 490);
+                        e.Graphics.DrawString(tempLives+" lives", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 225, 480);
                     
                     //level
-                    e.Graphics.DrawString("Level " + gd.getLevel(), new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 440, 490);
+                    e.Graphics.DrawString("Level " + gd.getLevel(), new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 425, 480);
 
                 }
 
