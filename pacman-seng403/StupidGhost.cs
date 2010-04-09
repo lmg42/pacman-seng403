@@ -105,8 +105,8 @@ namespace pacman
                 else {
                     //ERROR - ghost is in a wall
 		            //reset position to center
-		            x = 250;
-                    y = 250;
+                    y = (double)(12 * Map.BLOCKSIZE + Map.BLOCKSIZE / 2);
+                    x = (double)(12 * Map.BLOCKSIZE + Map.BLOCKSIZE / 2);
                     direction = Directions.UP;
                 }
             }
