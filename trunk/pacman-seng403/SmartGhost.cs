@@ -7,6 +7,12 @@ namespace pacman
 {
     class SmartGhost: Ghost
     {
+        public SmartGhost(int start_x, int start_y, Directions dir) {
+            x = start_x*Map.BLOCKSIZE + (Map.BLOCKSIZE/2);
+            y = start_y*Map.BLOCKSIZE + (Map.BLOCKSIZE/2);
+            direction = dir;
+		}
+
         public override void screenUpdate() {
             //find direction to pacman
             Directions mapCurrentPosition = Map.getMapEntry((int)x/Map.BLOCKSIZE, (int)y/Map.BLOCKSIZE);
@@ -42,7 +48,23 @@ namespace pacman
                 move(direction);
             }
             else { //cant move toward pacman
-                
+                if ((mapCurrentPosition & Directions.UP) == Directions.UP) {
+                    direction = Directions.UP;
+                    move(direction);
+                }
+                else if ((mapCurrentPosition & Directions.RIGHT) == Directions.RIGHT) {
+                    direction = Directions.RIGHT;
+                    move(direction);
+                }
+                else if ((mapCurrentPosition & Directions.LEFT) == Directions.LEFT) {
+                    direction = Directions.LEFT;
+                    move(direction);
+                }
+
+                else if ((mapCurrentPosition & Directions.DOWN) == Directions.DOWN) {
+                    direction = Directions.DOWN;
+                    move(direction);
+                }
             }
         }
     }

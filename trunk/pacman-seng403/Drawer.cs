@@ -199,7 +199,7 @@ namespace pacman
                     //blinky (red)
                     if (g_blinky == null)
                     {
-                        CurrentGameCharacters.blinky = new StupidGhost(1, 1, Directions.UP);
+                        CurrentGameCharacters.blinky = new SmartGhost(1, 1, Directions.UP);
                         g_blinky = this.CreateGraphics();
                         g_blinky.DrawEllipse(new Pen(Color.Red, 6), CurrentGameCharacters.blinky.getX(), CurrentGameCharacters.blinky.getY(), 5, 5);
                     }
