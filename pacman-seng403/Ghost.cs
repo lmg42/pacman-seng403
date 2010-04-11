@@ -19,7 +19,7 @@ namespace pacman
             weak = true;
         }
 
-        public void isWeak() {
+        public Boolean isWeak() {
             return weak;
         }
 
