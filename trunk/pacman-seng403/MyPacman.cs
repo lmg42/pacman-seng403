@@ -7,10 +7,10 @@ using System.Windows.Forms;
 
 namespace pacman
 {
-    //Assume the game map size is 25 by 25 blocks wide. Each block has size 20 which means each block is 20 by 20 pixels wide.
+    //Assume the game map size is 25 by 25 blocks wide. Each block has size 20 which means each block is 20 by 20 pixels wide. 
     public class MyPacman : GameCharacter
     {
-        private int BLOCKSIZE; //unit is pixel
+        private int BLOCKSIZE; //unit is pixel 
         private int numberofEdibles;
 
         private int userInputXDeriction;
@@ -45,12 +45,12 @@ namespace pacman
             pacmanYDeriction = 0;
             maparrayXPosition = 0;
             maparrayYPosition = 0;
-            radius = BLOCKSIZE/2 - 1;
+            radius = BLOCKSIZE / 2 - 1;
             pacmanTowarding = 0;
             whichQuadrant = 0;
             dotFound = false;
             bigdotFound = false;
-            whenPacmanEatsBigdot = new DateTime(0, 0, 0, 0, 0, 0);//year, month, day, hour, minute, second
+            whenPacmanEatsBigdot = new DateTime(0, 0, 0, 0, 0, 0);//year, month, day, hour, minute, second 
             timePastFromWhenPacmanEatsBigdot = new TimeSpan();
             superPacman = false;
             numberofEdibles = CountAllEdibles();
@@ -81,16 +81,16 @@ namespace pacman
             }
         }
 
-        //public void PacmanMovement()
+        //public void PacmanMovement() 
         public void screenUpdate()
         {
-            
-            //Assume in a 20 by 20 block the centre of the pacman is (10,10)
-            int pacmanBlockXOrigin = x - BLOCKSIZE/2;
-            int pacmanBlockYOrigin = y - BLOCKSIZE/2;
+
+            //Assume in a 20 by 20 block the centre of the pacman is (10,10) 
+            int pacmanBlockXOrigin = x - BLOCKSIZE / 2;
+            int pacmanBlockYOrigin = y - BLOCKSIZE / 2;
 
             Directions elementInfo = 0;
-            //User inputs a reverse direction. It doesn't matter where the pacman is in the map. The deriction of pacman is reversed.
+            //User inputs a reverse direction. It doesn't matter where the pacman is in the map. The deriction of pacman is reversed. 
             if (((userInputXDeriction == -pacmanXDeriction) && (userInputYDeriction == 0)) || ((userInputYDeriction == -pacmanYDeriction) && (userInputXDeriction == 0)))
             {
                 pacmanXDeriction = userInputXDeriction;
@@ -98,61 +98,61 @@ namespace pacman
                 return;
             }
 
-            //Pacman now is right in the block, otherwise whatever user inputs(except just reverse the deriction) won't be heard. Pacman will keep his latest deriction.  
-            if (pacmanBlockXOrigin % BLOCKSIZE == 0 && pacmanBlockYOrigin % BLOCKSIZE == 0) //wait until pacman is right in the block
+            //Pacman now is right in the block, otherwise whatever user inputs(except just reverse the deriction) won't be heard. Pacman will keep his latest deriction.   
+            if (pacmanBlockXOrigin % BLOCKSIZE == 0 && pacmanBlockYOrigin % BLOCKSIZE == 0) //wait until pacman is right in the block 
             {
-                //Calculate where pacman is at the map array.
+                //Calculate where pacman is at the map array. 
                 maparrayYPosition = pacmanBlockYOrigin / BLOCKSIZE;
                 maparrayXPosition = pacmanBlockXOrigin / BLOCKSIZE;
 
                 elementInfo = Map.getMapEntry(maparrayXPosition, maparrayYPosition);
 
-                if (!(userInputXDeriction == 0 && userInputYDeriction == 0)) //when user inputs something
+                if (!(userInputXDeriction == 0 && userInputYDeriction == 0)) //when user inputs something 
                 {
-                    if (userInputXDeriction == -1 && userInputYDeriction == 0 && (elementInfo & Directions.LEFT) == Directions.LEFT) //pacman goes left if possible
+                    if (userInputXDeriction == -1 && userInputYDeriction == 0 && (elementInfo & Directions.LEFT) == Directions.LEFT) //pacman goes left if possible 
                     {
                         pacmanYDeriction = 0;
                         pacmanXDeriction = -1;
                     }
-                    if (userInputXDeriction == 0 && userInputYDeriction == -1 && (elementInfo & Directions.UP) == Directions.UP) //pacman goes up if possible
+                    if (userInputXDeriction == 0 && userInputYDeriction == -1 && (elementInfo & Directions.UP) == Directions.UP) //pacman goes up if possible 
                     {
                         pacmanXDeriction = 0;
                         pacmanYDeriction = -1;
                     }
-                    if (userInputXDeriction == 1 && userInputYDeriction == 0 && (elementInfo & Directions.RIGHT) == Directions.RIGHT) //pacman goes right if possible
+                    if (userInputXDeriction == 1 && userInputYDeriction == 0 && (elementInfo & Directions.RIGHT) == Directions.RIGHT) //pacman goes right if possible 
                     {
                         pacmanYDeriction = 0;
                         pacmanXDeriction = 1;
                     }
-                    if (userInputXDeriction == 0 && userInputYDeriction == 1 && (elementInfo & Directions.DOWN) == Directions.DOWN) //pacman goes down if possible
+                    if (userInputXDeriction == 0 && userInputYDeriction == 1 && (elementInfo & Directions.DOWN) == Directions.DOWN) //pacman goes down if possible 
                     {
                         pacmanXDeriction = 0;
                         pacmanYDeriction = 1;
                     }
                 }
 
-                if (pacmanXDeriction == -1 && pacmanYDeriction == 0 && (elementInfo & Directions.LEFT) == 0) //stop going left if there is a wall on the left
+                if (pacmanXDeriction == -1 && pacmanYDeriction == 0 && (elementInfo & Directions.LEFT) == 0) //stop going left if there is a wall on the left 
                     pacmanXDeriction = 0;
-                if (pacmanXDeriction == 0 && pacmanYDeriction == -1 && (elementInfo & Directions.UP) == 0) //stop going up if there is a wall beyond
+                if (pacmanXDeriction == 0 && pacmanYDeriction == -1 && (elementInfo & Directions.UP) == 0) //stop going up if there is a wall beyond 
                     pacmanYDeriction = 0;
-                if (pacmanXDeriction == 1 && pacmanYDeriction == 0 && (elementInfo & Directions.RIGHT) == 0) //stop going right if there is a wall on the right
+                if (pacmanXDeriction == 1 && pacmanYDeriction == 0 && (elementInfo & Directions.RIGHT) == 0) //stop going right if there is a wall on the right 
                     pacmanXDeriction = 0;
-                if (pacmanXDeriction == 0 && pacmanYDeriction == 1 && (elementInfo & Directions.DOWN) == 0) //stop going down if there is a wall undernies
+                if (pacmanXDeriction == 0 && pacmanYDeriction == 1 && (elementInfo & Directions.DOWN) == 0) //stop going down if there is a wall undernies 
                     pacmanYDeriction = 0;
 
             }
 
-            PacmanTowarding(); //determine the direction the pacman is currently towarding to
+            PacmanTowarding(); //determine the direction the pacman is currently towarding to 
 
-            x = x + pacmanXDeriction; //update pacman position
+            x = x + pacmanXDeriction; //update pacman position 
             y = y + pacmanYDeriction;
 
-            //update score when pacman eats dot
+            //update score when pacman eats dot 
             if (DetermineCollisionBetweenPacmanAndDots())
             {
                 GameData.incrementScore(10);
             }
-            //update score, ghosts'status and pacman's status when pacman eats big dot
+            //update score, ghosts'status and pacman's status when pacman eats big dot 
             if (DetermineCollisionBetweenPacmanAndBigdots())
             {
                 GameData.incrementScore(100);
@@ -161,10 +161,10 @@ namespace pacman
                 CurrentGameCharacters.pinky.makeWeak();
                 CurrentGameCharacters.clyde.makeWeak();
                 CurrentGameCharacters.blinky.makeWeak();
-                superPacman=true;
+                superPacman = true;
             }
-            //in superpacman mode, pacman can kill ghosts. the duration is 10 seconds.
-            if(superPacman)
+            //in superpacman mode, pacman can kill ghosts. the duration is 10 seconds. 
+            if (superPacman)
             {
                 DateTime currentTime = DateTime.Now;
                 timePastFromWhenPacmanEatsBigdot = currentTime - whenPacmanEatsBigdot;
@@ -192,23 +192,29 @@ namespace pacman
                     }
                 }
                 if (timePastFromWhenPacmanEatsBigdot.Seconds > 10)
+                {
                     superPacman = false;
-                    //shall make the ghosts strong now
+                    CurrentGameCharacters.inky.makeStrong();
+                    CurrentGameCharacters.pinky.makeStrong();
+                    CurrentGameCharacters.clyde.makeStrong();
+                    CurrentGameCharacters.blinky.makeStrong();
+                }
             }
-            //not in superpacman mode, pacman will be killed if he is caught by any of the ghosts.
+            //not in superpacman mode, pacman will be killed if he is caught by any of the ghosts. 
             if (!superPacman)
             {
                 if (CheckCollision(CurrentGameCharacters.pacman, CurrentGameCharacters.inky) || CheckCollision(CurrentGameCharacters.pacman, CurrentGameCharacters.pinky) || CheckCollision(CurrentGameCharacters.pacman, CurrentGameCharacters.clyde) || CheckCollision(CurrentGameCharacters.pacman, CurrentGameCharacters.blinky))
                 {
                     GameData.decrementNumLives();
-                    //shall re-place the pacman?
+                    x = 250; //re-place the pacman
+                    y = 250;
                 }
 
             }
-            //when pacman eats all the dots(including big dots), the player wins.
+            //when pacman eats all the dots(including big dots), the player wins. 
             if (numberofEdibles == 0)
             {
-                //call game win function
+                //game finished function 
             }
         }
         public int getX()
@@ -263,14 +269,14 @@ namespace pacman
         }
         public bool DetermineCollisionBetweenPacmanAndDots()
         {
-            dotFound=false;
+            dotFound = false;
             DetermineWhichQuardant();
-            switch(whichQuadrant)
+            switch (whichQuadrant)
             {
                 case Directions.UP_LEFT:
                     foreach (Edibles lunch in CurrentGameCharacters.dots_topleft)
                     {
-                        dotFound=CheckCollision(lunch, CurrentGameCharacters.pacman);
+                        dotFound = CheckCollision(lunch, CurrentGameCharacters.pacman);
                         if (dotFound == true)
                         {
                             CurrentGameCharacters.dots_topleft.Remove(lunch);
@@ -289,7 +295,7 @@ namespace pacman
                             CurrentGameCharacters.dots_topright.Remove(lunch);
                             numberofEdibles--;
                             return true;
-                        }                     
+                        }
                     }
                     return false;
                     break;
@@ -302,7 +308,7 @@ namespace pacman
                             CurrentGameCharacters.dots_bottomleft.Remove(lunch);
                             numberofEdibles--;
                             return true;
-                        }                   
+                        }
                     }
                     return false;
                     break;
@@ -323,7 +329,7 @@ namespace pacman
         }
         public bool DetermineCollisionBetweenPacmanAndBigdots()
         {
-            bigdotFound=false;
+            bigdotFound = false;
             foreach (Edibles dinner in CurrentGameCharacters.bigdots)
             {
                 bigdotFound = CheckCollision(dinner, CurrentGameCharacters.pacman);
@@ -338,7 +344,7 @@ namespace pacman
         }
         public int CountAllEdibles()
         {
-            int all=0;
+            int all = 0;
             foreach (Edibles breakfast in CurrentGameCharacters.bigdots)
                 all++;
             foreach (Edibles breakfast in CurrentGameCharacters.dots_bottomleft)
@@ -352,41 +358,42 @@ namespace pacman
             return all;
 
         }
-        /*
-        void main() //do some testing on pacman movement
-        {
-            //test if the pacman is not fully in the block, the pacmanX and Y diretion shouldn't be changed
-            pacmanXDeriction = 0;
-            pacmanYDeriction = 0;
-
-            userInputXDeriction = 1;
-            userInputYDeriction = 1;
-
-            pacmanXPosition = 10;
-            pacmanYPosition = 10;
-
-            PacmanMovement();
-
-            Console.WriteLine(pacmanXDeriction);
-            Console.WriteLine(pacmanYDeriction);
-
-            //test if the pacman is fully in the block, the pacmanX and Y diretion should be changed
-            pacmanXDeriction = 0;
-            pacmanYDeriction = 0;
-
-            userInputXDeriction = 1;
-            userInputYDeriction = 1;
-
-            pacmanXPosition = 15;
-            pacmanYPosition = 15;
-
-            PacmanMovement();
-
-            Console.WriteLine(pacmanXDeriction);
-            Console.WriteLine(pacmanYDeriction);
-
-
-        }
+        /* 
+        void main() //do some testing on pacman movement 
+        { 
+            //test if the pacman is not fully in the block, the pacmanX and Y diretion shouldn't be changed 
+            pacmanXDeriction = 0; 
+            pacmanYDeriction = 0; 
+  
+            userInputXDeriction = 1; 
+            userInputYDeriction = 1; 
+  
+            pacmanXPosition = 10; 
+            pacmanYPosition = 10; 
+  
+            PacmanMovement(); 
+  
+            Console.WriteLine(pacmanXDeriction); 
+            Console.WriteLine(pacmanYDeriction); 
+  
+            //test if the pacman is fully in the block, the pacmanX and Y diretion should be changed 
+            pacmanXDeriction = 0; 
+            pacmanYDeriction = 0; 
+  
+            userInputXDeriction = 1; 
+            userInputYDeriction = 1; 
+  
+            pacmanXPosition = 15; 
+            pacmanYPosition = 15; 
+  
+            PacmanMovement(); 
+  
+            Console.WriteLine(pacmanXDeriction); 
+            Console.WriteLine(pacmanYDeriction); 
+  
+  
+        } 
         */
     }
-}
+} 
+ 
