@@ -50,6 +50,7 @@
     <Compile Include="CurrentGameCharacters.cs" />
     <Compile Include="Directions.cs" />
     <Compile Include="Drawer.cs" />
+    <Compile Include="Edibles.cs" />
     <Compile Include="GameCharacter.cs" />
     <Compile Include="GameData.cs" />
     <Compile Include="Ghost.cs" />

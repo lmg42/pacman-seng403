@@ -220,7 +220,7 @@ namespace pacman
                         //blinky (red)
                         if (g_blinky == null)
                         {
-                            CurrentGameCharacters.blinky = new SmartGhost(1, 1, Directions.UP);
+                            CurrentGameCharacters.blinky = new Ghost(1, 1, Directions.UP, false);
                             g_blinky = this.CreateGraphics();
                             g_blinky.DrawEllipse(new Pen(Color.Red, 6), CurrentGameCharacters.blinky.getX(), CurrentGameCharacters.blinky.getY(), 5, 5);
                         }
@@ -236,7 +236,7 @@ namespace pacman
                         //pinky (pink)
                         if (g_pinky == null)
                         {
-                            CurrentGameCharacters.pinky = new StupidGhost(23, 1, Directions.UP);
+                            CurrentGameCharacters.pinky = new Ghost(23, 1, Directions.UP, false);
                             g_pinky = this.CreateGraphics();
                             g_pinky.DrawEllipse(new Pen(Color.Crimson, 6), CurrentGameCharacters.pinky.getX(), CurrentGameCharacters.pinky.getY(), 5, 5);
                         }
@@ -252,7 +252,7 @@ namespace pacman
                         //inky (blue)
                         if (g_inky == null)
                         {
-                            CurrentGameCharacters.inky = new StupidGhost(23, 23, Directions.UP);
+                            CurrentGameCharacters.inky = new Ghost(23, 23, Directions.UP, false);
                             g_inky = this.CreateGraphics();
                             g_inky.DrawEllipse(new Pen(Color.Blue, 6), CurrentGameCharacters.inky.getX(), CurrentGameCharacters.inky.getY(), 5, 5);
                         }
@@ -268,7 +268,7 @@ namespace pacman
                         //clyde (orange)
                         if (g_clyde == null)
                         {
-                            CurrentGameCharacters.clyde = new StupidGhost(1, 23, Directions.UP);
+                            CurrentGameCharacters.clyde = new Ghost(1, 23, Directions.UP, false);
                             g_clyde = this.CreateGraphics();
                             g_clyde.DrawEllipse(new Pen(Color.Orange, 6), CurrentGameCharacters.clyde.getX(), CurrentGameCharacters.clyde.getY(), 5, 5);
                         }
