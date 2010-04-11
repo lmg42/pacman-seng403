@@ -39,6 +39,10 @@ namespace pacman
             private Graphics g_inky = null;
             private Graphics g_clyde = null;
 
+            private Graphics g_fruit = null;
+            private Bitmap b_fruit = null;
+            private int fruitCounter = 0;
+
             private GameData gd = new GameData();
 
 
@@ -160,7 +164,14 @@ namespace pacman
                 else
                 {
 
-                    
+                    //fruit spawning counter
+                    if ((fruitCounter > 100) && (fruitCounter < 1000))
+                    {
+                        g_fruit = this.CreateGraphics();
+                        g_fruit.DrawEllipse(new Pen(Color.Teal, 6), 250, 250, 1, 1);
+                        /*b_fruit = this.CreateGraphics();
+                        g_fruit = DrawImage(b_fruit, this.ClientRectangle, new Rectangle(), GraphicsUnit.Pixel);*/
+                    }
                     // Pacman Movement
                     if (g_pacman == null)
                     {
@@ -184,11 +195,11 @@ namespace pacman
                         int oldy = CurrentGameCharacters.pacman.getY();
                         CurrentGameCharacters.pacman.screenUpdate();
                        
-                        /*
-                        g_pacman.DrawRectangle(new Pen(Color.Black, 1), oldx, oldy, 20, 20);
+                        
+                        /*g_pacman.DrawRectangle(new Pen(Color.Black, 1), oldx, oldy, 20, 20);
                         g_pacman.FillRectangle(new SolidBrush(Color.Black), oldx, oldy, 20, 20);
-                        g_pacman.DrawImage(b_pacman, this.ClientRectangle, new Rectangle(CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 20, 20), GraphicsUnit.Pixel);
-                        */
+                        g_pacman.DrawImage(b_pacman, this.ClientRectangle, new Rectangle(CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 20, 20), GraphicsUnit.Pixel);*/
+                        
                         
                         g_pacman.DrawEllipse(new Pen(Color.Black, 12), oldx, oldy, 1, 1);
                         g_pacman.DrawEllipse(new Pen(Color.Yellow, 12), CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 1, 1);
