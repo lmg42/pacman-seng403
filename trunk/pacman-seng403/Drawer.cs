@@ -98,7 +98,7 @@ namespace pacman
                     e.Graphics.DrawLine(new Pen(Color.Beige, 1), new Point(500, 500), new Point(500, 0));
                     e.Graphics.DrawLine(new Pen(Color.Beige, 1), new Point(500, 0), new Point(0, 0));
 
-                    //TEST AREA -- DRAWING MENU OPTION
+                    //DRAWING MENU OPTION
                     e.Graphics.DrawEllipse(new Pen(Color.Yellow, 5), 175, 353, 10, 10);
                     if (firstTime == true)
                     {
@@ -307,55 +307,8 @@ namespace pacman
 
             protected static void checkForInput()
             {
-                enterPushed = false;
-                cursorDown = false;
-                cursorUp = false;
-                while (!enterPushed)
+                while (true)
                 {
-                    /*
-                    //Console.Write("Inside while loop\n");
-                    //Console.Write("keyCheck value is {0}\n", keyCheck.KeyCode);
-                    if (keyCheck.KeyCode == Keys.Enter)
-                    {
-                        //Console.Write("Inside if -- enter has been pushed\n");
-                        enterPushed = true;
-                    }
-                    else
-                    {
-                        //Console.Write("Inside else\n");
-                        if (keyCheck.KeyCode == Keys.Down)
-                        {
-                            //Console.Write("Inside if -- up key has been pushed\n");
-                            cursorDown = true;
-                        }
-                        else if (keyCheck.KeyCode == Keys.Up)
-                        {
-                            //Console.Write("Inside else if -- up key has been pushed\n");
-                            cursorUp = true;
-                        }
-                    }
-                    try
-                    {
-                        Form.ActiveForm.Refresh();
-                    }
-                    catch (Exception e)
-                    {
-                        Console.Write("Exception: {0}", e);
-                    }
-                    /*
-                    if(enterPushed)
-                        Console.Write("Enter is true\n");
-                    else
-                        Console.Write("Enter is false\n");
-                    if(cursorDown)
-                        Console.Write("Cursor down is true\n");
-                    else
-                        Console.Write("Cursor down is false\n");
-                    if(cursorUp)
-                        Console.Write("Cursor up is true\n");
-                    else
-                        Console.Write("Cursor up is false\n"); */
-
                     try
                     {
                         Form.ActiveForm.Refresh();
