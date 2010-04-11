@@ -43,9 +43,6 @@ namespace pacman
             private Bitmap b_fruit = null;
             private int fruitCounter = 0;
 
-            private GameData gd = new GameData();
-
-
             //Creates basic window - 'Pacman' will be in the title bar, size is Size, and 
             //background colour is black
             public AForm()
@@ -166,126 +163,138 @@ namespace pacman
                 else
                 {
 
-                    //fruit spawning counter
-                    fruitCounter++;
-                    if ((fruitCounter > 100) && (fruitCounter < 1000))
+                    if (GameData.gameDone)
                     {
-                        g_fruit = this.CreateGraphics();
-                        g_fruit.DrawEllipse(new Pen(Color.Teal, 6), 250, 250, 1, 1);
-                        /*b_fruit = this.CreateGraphics();
-                        g_fruit = DrawImage(b_fruit, this.ClientRectangle, new Rectangle(), GraphicsUnit.Pixel);*/
-                    }
-                    // Pacman Movement
-                    if (g_pacman == null)
-                    {
-                        //CurrentGameCharacters.pacman = new MyPacman(250, 245);
-                        //CurrentGameCharacters.pacman = new MyPacman(120, 90);
-                        //g_pacman = this.CreateGraphics();
-                        // b_pacman = pacmanSENG403.Properties.Resources.pacman;
-                        // g_pacman.DrawImage(b_pacman, this.ClientRectangle, new Rectangle(CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 20, 20), GraphicsUnit.Pixel);
-
-                        
-                        CurrentGameCharacters.pacman = new MyPacman(250, 250);
-                        g_pacman = this.CreateGraphics();
-                        g_pacman.DrawEllipse(new Pen(Color.Yellow, 12), CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 1, 1);
-                        
-                        
-                    }
-                    
-                    else
-                    {
-                        int oldx = CurrentGameCharacters.pacman.getX();
-                        int oldy = CurrentGameCharacters.pacman.getY();
-                        CurrentGameCharacters.pacman.screenUpdate();
-                       
-                        
-                        /*g_pacman.DrawRectangle(new Pen(Color.Black, 1), oldx, oldy, 20, 20);
-                        g_pacman.FillRectangle(new SolidBrush(Color.Black), oldx, oldy, 20, 20);
-                        g_pacman.DrawImage(b_pacman, this.ClientRectangle, new Rectangle(CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 20, 20), GraphicsUnit.Pixel);*/
-                        
-                        
-                        g_pacman.DrawEllipse(new Pen(Color.Black, 12), oldx, oldy, 1, 1);
-                        g_pacman.DrawEllipse(new Pen(Color.Yellow, 12), CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 1, 1);
-                    }     
-       
-
-                    // Ghost Movement
-                    //blinky (red)
-                    if (g_blinky == null)
-                    {
-                        CurrentGameCharacters.blinky = new SmartGhost(1, 1, Directions.UP);
-                        g_blinky = this.CreateGraphics();
-                        g_blinky.DrawEllipse(new Pen(Color.Red, 6), CurrentGameCharacters.blinky.getX(), CurrentGameCharacters.blinky.getY(), 5, 5);
-                    }
-                    else
-                    {
-                        int oldx = CurrentGameCharacters.blinky.getX();
-                        int oldy = CurrentGameCharacters.blinky.getY();
-                        CurrentGameCharacters.blinky.screenUpdate();
-                        g_blinky.DrawEllipse(new Pen(Color.Black, 6), oldx, oldy, 5, 5);
-                        g_blinky.DrawEllipse(new Pen(Color.Red, 6), CurrentGameCharacters.blinky.getX(), CurrentGameCharacters.blinky.getY(), 5, 5);
-                    }
-                    
-                    //pinky (pink)
-                    if (g_pinky == null)
-                    {
-                        CurrentGameCharacters.pinky = new StupidGhost(23, 1, Directions.UP);
-                        g_pinky = this.CreateGraphics();
-                        g_pinky.DrawEllipse(new Pen(Color.Crimson, 6), CurrentGameCharacters.pinky.getX(), CurrentGameCharacters.pinky.getY(), 5, 5);
-                    }
-                    else
-                    {
-                        int oldx = CurrentGameCharacters.pinky.getX();
-                        int oldy = CurrentGameCharacters.pinky.getY();
-                        CurrentGameCharacters.pinky.screenUpdate();
-                        g_pinky.DrawEllipse(new Pen(Color.Black, 6), oldx, oldy, 5, 5);
-                        g_pinky.DrawEllipse(new Pen(Color.Crimson, 6), CurrentGameCharacters.pinky.getX(), CurrentGameCharacters.pinky.getY(), 5, 5);
-                    }
-                    
-                    //inky (blue)
-                    if (g_inky == null)
-                    {
-                        CurrentGameCharacters.inky = new StupidGhost(23, 23, Directions.UP);
-                        g_inky = this.CreateGraphics();
-                        g_inky.DrawEllipse(new Pen(Color.Blue, 6), CurrentGameCharacters.inky.getX(), CurrentGameCharacters.inky.getY(), 5, 5);
-                    }
-                    else
-                    {
-                        int oldx = CurrentGameCharacters.inky.getX();
-                        int oldy = CurrentGameCharacters.inky.getY();
-                        CurrentGameCharacters.inky.screenUpdate();
-                        g_inky.DrawEllipse(new Pen(Color.Black, 6), oldx, oldy, 5, 5);
-                        g_inky.DrawEllipse(new Pen(Color.Blue, 6), CurrentGameCharacters.inky.getX(), CurrentGameCharacters.inky.getY(), 5, 5);
-                    }
-                    
-                    //clyde (orange)
-                    if (g_clyde == null)
-                    {
-                        CurrentGameCharacters.clyde = new StupidGhost(1, 23, Directions.UP);
-                        g_clyde = this.CreateGraphics();
-                        g_clyde.DrawEllipse(new Pen(Color.Orange, 6), CurrentGameCharacters.clyde.getX(), CurrentGameCharacters.clyde.getY(), 5, 5);
-                    }
-                    else
-                    {
-                        int oldx = CurrentGameCharacters.clyde.getX();
-                        int oldy = CurrentGameCharacters.clyde.getY();
-                        CurrentGameCharacters.clyde.screenUpdate();
-                        g_clyde.DrawEllipse(new Pen(Color.Black, 6), oldx, oldy, 5, 5);
-                        g_clyde.DrawEllipse(new Pen(Color.Orange, 6), CurrentGameCharacters.clyde.getX(), CurrentGameCharacters.clyde.getY(), 5, 5);
+                        e.Graphics.DrawString("GAME OVER", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 250, 250);
+                        e.Graphics.DrawString("Press Enter to Continue", new Font("Ouhod", 12, FontStyle.Regular), Brushes.Yellow, 250, 280);
+                        if (keyCheck.KeyCode == Keys.Enter)
+                            showMenu = true;
                     }
 
-                    //score
-                    e.Graphics.DrawString("Score: " + gd.getScore(), new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 2, 480);
-
-                    //lives left
-                    int tempLives = gd.getNumLives();
-                    if (tempLives == 1)
-                        e.Graphics.DrawString("1 life", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 225, 480);
                     else
-                        e.Graphics.DrawString(tempLives+" lives", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 225, 480);
-                    
-                    //level
-                    e.Graphics.DrawString("Level " + gd.getLevel(), new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 425, 480);
+                    {
+                        //fruit spawning counter
+                        fruitCounter++;
+                        if ((fruitCounter > 100) && (fruitCounter < 1000))
+                        {
+                            g_fruit = this.CreateGraphics();
+                            g_fruit.DrawEllipse(new Pen(Color.Teal, 6), 250, 250, 1, 1);
+                            /*b_fruit = this.CreateGraphics();
+                            g_fruit = DrawImage(b_fruit, this.ClientRectangle, new Rectangle(), GraphicsUnit.Pixel);*/
+                        }
+                        // Pacman Movement
+                        if (g_pacman == null)
+                        {
+                            //CurrentGameCharacters.pacman = new MyPacman(250, 245);
+                            //CurrentGameCharacters.pacman = new MyPacman(120, 90);
+                            //g_pacman = this.CreateGraphics();
+                            // b_pacman = pacmanSENG403.Properties.Resources.pacman;
+                            // g_pacman.DrawImage(b_pacman, this.ClientRectangle, new Rectangle(CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 20, 20), GraphicsUnit.Pixel);
+
+
+                            CurrentGameCharacters.pacman = new MyPacman(250, 250);
+                            g_pacman = this.CreateGraphics();
+                            g_pacman.DrawEllipse(new Pen(Color.Yellow, 12), CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 1, 1);
+
+
+                        }
+
+                        else
+                        {
+                            int oldx = CurrentGameCharacters.pacman.getX();
+                            int oldy = CurrentGameCharacters.pacman.getY();
+                            CurrentGameCharacters.pacman.screenUpdate();
+
+
+                            /*g_pacman.DrawRectangle(new Pen(Color.Black, 1), oldx, oldy, 20, 20);
+                            g_pacman.FillRectangle(new SolidBrush(Color.Black), oldx, oldy, 20, 20);
+                            g_pacman.DrawImage(b_pacman, this.ClientRectangle, new Rectangle(CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 20, 20), GraphicsUnit.Pixel);*/
+
+
+                            g_pacman.DrawEllipse(new Pen(Color.Black, 12), oldx, oldy, 1, 1);
+                            g_pacman.DrawEllipse(new Pen(Color.Yellow, 12), CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 1, 1);
+                        }
+
+
+                        // Ghost Movement
+                        //blinky (red)
+                        if (g_blinky == null)
+                        {
+                            CurrentGameCharacters.blinky = new SmartGhost(1, 1, Directions.UP);
+                            g_blinky = this.CreateGraphics();
+                            g_blinky.DrawEllipse(new Pen(Color.Red, 6), CurrentGameCharacters.blinky.getX(), CurrentGameCharacters.blinky.getY(), 5, 5);
+                        }
+                        else
+                        {
+                            int oldx = CurrentGameCharacters.blinky.getX();
+                            int oldy = CurrentGameCharacters.blinky.getY();
+                            CurrentGameCharacters.blinky.screenUpdate();
+                            g_blinky.DrawEllipse(new Pen(Color.Black, 6), oldx, oldy, 5, 5);
+                            g_blinky.DrawEllipse(new Pen(Color.Red, 6), CurrentGameCharacters.blinky.getX(), CurrentGameCharacters.blinky.getY(), 5, 5);
+                        }
+
+                        //pinky (pink)
+                        if (g_pinky == null)
+                        {
+                            CurrentGameCharacters.pinky = new StupidGhost(23, 1, Directions.UP);
+                            g_pinky = this.CreateGraphics();
+                            g_pinky.DrawEllipse(new Pen(Color.Crimson, 6), CurrentGameCharacters.pinky.getX(), CurrentGameCharacters.pinky.getY(), 5, 5);
+                        }
+                        else
+                        {
+                            int oldx = CurrentGameCharacters.pinky.getX();
+                            int oldy = CurrentGameCharacters.pinky.getY();
+                            CurrentGameCharacters.pinky.screenUpdate();
+                            g_pinky.DrawEllipse(new Pen(Color.Black, 6), oldx, oldy, 5, 5);
+                            g_pinky.DrawEllipse(new Pen(Color.Crimson, 6), CurrentGameCharacters.pinky.getX(), CurrentGameCharacters.pinky.getY(), 5, 5);
+                        }
+
+                        //inky (blue)
+                        if (g_inky == null)
+                        {
+                            CurrentGameCharacters.inky = new StupidGhost(23, 23, Directions.UP);
+                            g_inky = this.CreateGraphics();
+                            g_inky.DrawEllipse(new Pen(Color.Blue, 6), CurrentGameCharacters.inky.getX(), CurrentGameCharacters.inky.getY(), 5, 5);
+                        }
+                        else
+                        {
+                            int oldx = CurrentGameCharacters.inky.getX();
+                            int oldy = CurrentGameCharacters.inky.getY();
+                            CurrentGameCharacters.inky.screenUpdate();
+                            g_inky.DrawEllipse(new Pen(Color.Black, 6), oldx, oldy, 5, 5);
+                            g_inky.DrawEllipse(new Pen(Color.Blue, 6), CurrentGameCharacters.inky.getX(), CurrentGameCharacters.inky.getY(), 5, 5);
+                        }
+
+                        //clyde (orange)
+                        if (g_clyde == null)
+                        {
+                            CurrentGameCharacters.clyde = new StupidGhost(1, 23, Directions.UP);
+                            g_clyde = this.CreateGraphics();
+                            g_clyde.DrawEllipse(new Pen(Color.Orange, 6), CurrentGameCharacters.clyde.getX(), CurrentGameCharacters.clyde.getY(), 5, 5);
+                        }
+                        else
+                        {
+                            int oldx = CurrentGameCharacters.clyde.getX();
+                            int oldy = CurrentGameCharacters.clyde.getY();
+                            CurrentGameCharacters.clyde.screenUpdate();
+                            g_clyde.DrawEllipse(new Pen(Color.Black, 6), oldx, oldy, 5, 5);
+                            g_clyde.DrawEllipse(new Pen(Color.Orange, 6), CurrentGameCharacters.clyde.getX(), CurrentGameCharacters.clyde.getY(), 5, 5);
+                        }
+
+                        //score
+                        e.Graphics.DrawString("Score: " + GameData.score, new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 2, 480);
+
+                        //lives left
+                        int tempLives = GameData.numLives;
+                        if (tempLives == 1)
+                            e.Graphics.DrawString("1 life", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 225, 480);
+                        else
+                            e.Graphics.DrawString(tempLives + " lives", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 225, 480);
+
+                        //level
+                        e.Graphics.DrawString("Level " + GameData.level, new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 425, 480);
+
+                    }
 
                 }
 
