@@ -7,10 +7,10 @@ namespace pacman
 {
     public class GameData
     {
-        public static int score;
-        public static int level;
-        public static int numLives;
-        public static Boolean gameDone;
+        public static int score = 0 ;
+        public static int level = 1 ;
+        public static int numLives = 3;
+        public static Boolean gameDone = false ;
 
        public GameData() {
             score = 0;
@@ -31,29 +31,29 @@ namespace pacman
             return numLives;
         }
 
-        public void incrementScore(int points) {
+        public static void incrementScore(int points) {
             if (points > 0)
                 score += points;
         }
 
-        public void decrementScore(int points) {
+        public static void decrementScore(int points) {
             if (points > 0)
                 score -= points ;
         }
 
-        public void incrementLevel(){
+        public static void incrementLevel(){
             level++;
         }
 
-        public void decrementLevel() {
+        public static void decrementLevel() {
             level--;
         }
 
-        public void incrementNumLives() {
+        public static void incrementNumLives() {
             numLives++;
         }
 
-        public void decrementNumLives() {
+        public static void decrementNumLives() {
             if (numLives >= 0)
                 numLives--;
             if (numLives == -1)
