@@ -7,11 +7,11 @@ using System.Windows.Forms;
 
 namespace pacman
 {
-    //Assume the game map size is 50 by 50 blocks wide. Each block has size 15 which means each block is 10 by 10 pixels wide.
-    //Each element is an integer whose first 4 LSB contain the possible moving directions for the pacman.
+    //Assume the game map size is 25 by 25 blocks wide. Each block has size 20 which means each block is 20 by 20 pixels wide.
     public class MyPacman : GameCharacter
     {
-        protected const int BLOCKSIZE = 20; //unit is pixel
+        private int BLOCKSIZE; //unit is pixel
+        private int numberofEdibles;
 
         private int userInputXDeriction;
         private int userInputYDeriction;
@@ -24,7 +24,16 @@ namespace pacman
         private int x;
         private int y;
 
+        private Directions whichQuadrant;
+        private bool dotFound;
+        private bool bigdotFound;
+        private DateTime whenPacmanEatsBigdot;
+        private TimeSpan timePastFromWhenPacmanEatsBigdot;
+        private bool superPacman;
+
         private Directions pacmanTowarding;
+
+
 
         public MyPacman(int x, int y)
         {
@@ -36,8 +45,16 @@ namespace pacman
             pacmanYDeriction = 0;
             maparrayXPosition = 0;
             maparrayYPosition = 0;
-            radius = 4;
+            radius = BLOCKSIZE/2 - 1;
             pacmanTowarding = 0;
+            whichQuadrant = 0;
+            dotFound = false;
+            bigdotFound = false;
+            whenPacmanEatsBigdot = new DateTime(0, 0, 0, 0, 0, 0);//year, month, day, hour, minute, second
+            timePastFromWhenPacmanEatsBigdot = new TimeSpan();
+            superPacman = false;
+            numberofEdibles = CountAllEdibles();
+            BLOCKSIZE = Map.BLOCKSIZE;
         }
 
         public void UserInput(KeyEventArgs e)
@@ -68,9 +85,9 @@ namespace pacman
         public void screenUpdate()
         {
             
-            //Assume in a 10 by 10 block the centre of the pacman is (5,5)
-            int pacmanBlockXOrigin = x - 10;
-            int pacmanBlockYOrigin = y - 10;
+            //Assume in a 20 by 20 block the centre of the pacman is (10,10)
+            int pacmanBlockXOrigin = x - BLOCKSIZE/2;
+            int pacmanBlockYOrigin = y - BLOCKSIZE/2;
 
             Directions elementInfo = 0;
             //User inputs a reverse direction. It doesn't matter where the pacman is in the map. The deriction of pacman is reversed.
@@ -113,7 +130,6 @@ namespace pacman
                         pacmanYDeriction = 1;
                     }
                 }
-                //Console.Write(pacmanYDeriction + "\n");
 
                 if (pacmanXDeriction == -1 && pacmanYDeriction == 0 && (elementInfo & Directions.LEFT) == 0) //stop going left if there is a wall on the left
                     pacmanXDeriction = 0;
@@ -131,6 +147,69 @@ namespace pacman
             x = x + pacmanXDeriction; //update pacman position
             y = y + pacmanYDeriction;
 
+            //update score when pacman eats dot
+            if (DetermineCollisionBetweenPacmanAndDots())
+            {
+                GameData.incrementScore(10);
+            }
+            //update score, ghosts'status and pacman's status when pacman eats big dot
+            if (DetermineCollisionBetweenPacmanAndBigdots())
+            {
+                GameData.incrementScore(100);
+                whenPacmanEatsBigdot = DateTime.Now;
+                CurrentGameCharacters.inky.makeWeak();
+                CurrentGameCharacters.pinky.makeWeak();
+                CurrentGameCharacters.clyde.makeWeak();
+                CurrentGameCharacters.blinky.makeWeak();
+                superPacman=true;
+            }
+            //in superpacman mode, pacman can kill ghosts. the duration is 10 seconds.
+            if(superPacman)
+            {
+                DateTime currentTime = DateTime.Now;
+                timePastFromWhenPacmanEatsBigdot = currentTime - whenPacmanEatsBigdot;
+                if (timePastFromWhenPacmanEatsBigdot.Seconds <= 10)
+                {
+                    if (CheckCollision(CurrentGameCharacters.pacman, CurrentGameCharacters.inky))
+                    {
+                        CurrentGameCharacters.inky.kill();
+                        GameData.incrementScore(500);
+                    }
+                    if (CheckCollision(CurrentGameCharacters.pacman, CurrentGameCharacters.pinky))
+                    {
+                        CurrentGameCharacters.pinky.kill();
+                        GameData.incrementScore(500);
+                    }
+                    if (CheckCollision(CurrentGameCharacters.pacman, CurrentGameCharacters.clyde))
+                    {
+                        CurrentGameCharacters.clyde.kill();
+                        GameData.incrementScore(500);
+                    }
+                    if (CheckCollision(CurrentGameCharacters.pacman, CurrentGameCharacters.blinky))
+                    {
+                        CurrentGameCharacters.blinky.kill();
+                        GameData.incrementScore(500);
+                    }
+                }
+                if (timePastFromWhenPacmanEatsBigdot.Seconds > 10)
+                    superPacman = false;
+                    //shall make the ghosts strong now
+            }
+            //not in superpacman mode, pacman will be killed if he is caught by any of the ghosts.
+            if (!superPacman)
+            {
+                if (CheckCollision(CurrentGameCharacters.pacman, CurrentGameCharacters.inky) || CheckCollision(CurrentGameCharacters.pacman, CurrentGameCharacters.pinky) || CheckCollision(CurrentGameCharacters.pacman, CurrentGameCharacters.clyde) || CheckCollision(CurrentGameCharacters.pacman, CurrentGameCharacters.blinky))
+                {
+                    GameData.decrementNumLives();
+                    //shall re-place the pacman?
+                }
+
+            }
+            //when pacman eats all the dots(including big dots), the player wins.
+            if (numberofEdibles == 0)
+            {
+                //call game win function
+            }
         }
         public int getX()
         {
@@ -146,7 +225,7 @@ namespace pacman
             return pacmanTowarding;
         }
 
-        public static bool CheckCollision(GameCharacter a, GameCharacter b)
+        public bool CheckCollision(GameCharacter a, GameCharacter b)
         {
             double XDifference;
             double YDifference;
@@ -154,7 +233,7 @@ namespace pacman
             XDifference = a.getX() - b.getX();
             YDifference = a.getY() - b.getY();
 
-            if ((Math.Abs(XDifference) < BLOCKSIZE / 2) && (Math.Abs(YDifference) < BLOCKSIZE / 2))
+            if ((Math.Abs(XDifference) < BLOCKSIZE / 3) && (Math.Abs(YDifference) < BLOCKSIZE / 3))
                 return true;
             else
                 return false;
@@ -171,7 +250,108 @@ namespace pacman
             if (pacmanXDeriction == 0 && pacmanYDeriction == -1)
                 pacmanTowarding = Directions.UP;
         }
+        public void DetermineWhichQuardant()
+        {
+            if (x <= 249 && y <= 249)
+                whichQuadrant = Directions.UP_LEFT;
+            if (x > 249 && y <= 249)
+                whichQuadrant = Directions.UP_RIGHT;
+            if (x <= 249 && y > 249)
+                whichQuadrant = Directions.DOWN_LEFT;
+            if (x > 249 && y > 249)
+                whichQuadrant = Directions.DOWN_RIGHT;
+        }
+        public bool DetermineCollisionBetweenPacmanAndDots()
+        {
+            dotFound=false;
+            DetermineWhichQuardant();
+            switch(whichQuadrant)
+            {
+                case Directions.UP_LEFT:
+                    foreach (Edibles lunch in CurrentGameCharacters.dots_topleft)
+                    {
+                        dotFound=CheckCollision(lunch, CurrentGameCharacters.pacman);
+                        if (dotFound == true)
+                        {
+                            CurrentGameCharacters.dots_topleft.Remove(lunch);
+                            numberofEdibles--;
+                            return true;
+                        }
+                    }
+                    return false;
+                    break;
+                case Directions.UP_RIGHT:
+                    foreach (Edibles lunch in CurrentGameCharacters.dots_topright)
+                    {
+                        dotFound = CheckCollision(lunch, CurrentGameCharacters.pacman);
+                        if (dotFound == true)
+                        {
+                            CurrentGameCharacters.dots_topright.Remove(lunch);
+                            numberofEdibles--;
+                            return true;
+                        }                     
+                    }
+                    return false;
+                    break;
+                case Directions.DOWN_LEFT:
+                    foreach (Edibles lunch in CurrentGameCharacters.dots_bottomleft)
+                    {
+                        dotFound = CheckCollision(lunch, CurrentGameCharacters.pacman);
+                        if (dotFound == true)
+                        {
+                            CurrentGameCharacters.dots_bottomleft.Remove(lunch);
+                            numberofEdibles--;
+                            return true;
+                        }                   
+                    }
+                    return false;
+                    break;
+                case Directions.DOWN_RIGHT:
+                    foreach (Edibles lunch in CurrentGameCharacters.dots_bottomright)
+                    {
+                        dotFound = CheckCollision(lunch, CurrentGameCharacters.pacman);
+                        if (dotFound == true)
+                        {
+                            CurrentGameCharacters.dots_bottomright.Remove(lunch);
+                            numberofEdibles--;
+                            return true;
+                        }
+                    }
+                    return false;
+                    break;
+            }
+        }
+        public bool DetermineCollisionBetweenPacmanAndBigdots()
+        {
+            bigdotFound=false;
+            foreach (Edibles dinner in CurrentGameCharacters.bigdots)
+            {
+                bigdotFound = CheckCollision(dinner, CurrentGameCharacters.pacman);
+                if (bigdotFound == true)
+                {
+                    CurrentGameCharacters.bigdots.Remove(dinner);
+                    numberofEdibles--;
+                    return true;
+                }
+            }
+            return false;
+        }
+        public int CountAllEdibles()
+        {
+            int all=0;
+            foreach (Edibles breakfast in CurrentGameCharacters.bigdots)
+                all++;
+            foreach (Edibles breakfast in CurrentGameCharacters.dots_bottomleft)
+                all++;
+            foreach (Edibles breakfast in CurrentGameCharacters.dots_bottomright)
+                all++;
+            foreach (Edibles breakfast in CurrentGameCharacters.dots_topleft)
+                all++;
+            foreach (Edibles breakfast in CurrentGameCharacters.dots_topright)
+                all++;
+            return all;
 
+        }
         /*
         void main() //do some testing on pacman movement
         {
