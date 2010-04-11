@@ -15,7 +15,7 @@ namespace pacman
 
         private static Thread keyboardInputThread;
         private static KeyEventArgs keyCheck = new KeyEventArgs(new Keys());
-        private static bool debugMenu = false;
+        private static bool debugMenu = true;
         private static bool debugGame = true;
 
 
@@ -88,7 +88,8 @@ namespace pacman
             {
                 if (showMenu == true)
                 {
-                    /*Font title = new Font("Purisa", 26);
+                    fruitCounter = 0;
+                    Font title = new Font("Purisa", 26);
                     Font mainMenuItems = new Font("Ouhod", 16);
                     e.Graphics.DrawString("Pacman", title, Brushes.Green, 175, 50);
                     //main image goes here
@@ -106,15 +107,16 @@ namespace pacman
                     {
                         e.Graphics.DrawEllipse(new Pen(Color.Yellow, 5), 175, 353, 10, 10);
                         firstTime = false;
+                        cursorPos = 1;
                     }
-                    if ((cursorUp || cursorDown) && !(cursorUp && cursorDown))
+                    if (((keyCheck.KeyCode == Keys.Up) || (keyCheck.KeyCode == Keys.Down)) && !((keyCheck.KeyCode == Keys.Up) && (keyCheck.KeyCode == Keys.Down)))
                     {
                         //redraw cursor
                         switch (cursorPos)
                         {
                             //case 1: if cursorDown, goto pos2
                             case 1:
-                                if (cursorDown)
+                                if (keyCheck.KeyCode == Keys.Down)
                                 {
                                     cursorPos = 2;
                                     //erase pos1
@@ -126,7 +128,7 @@ namespace pacman
                             //case 2: if cursorDown, goto pos3
                             //		  if cursorUp, goto pos1
                             case 2:
-                                if (cursorDown)
+                                if (keyCheck.KeyCode == Keys.Down)
                                 {
                                     cursorPos = 3;
                                     //erase pos2
@@ -134,7 +136,7 @@ namespace pacman
                                     //draw pos3
                                     e.Graphics.DrawEllipse(new Pen(Color.Yellow, 5), 175, 413, 10, 10);
                                 }
-                                else if (cursorUp)
+                                else if (keyCheck.KeyCode == Keys.Up)
                                 {
                                     cursorPos = 1;
                                     //erase pos2
@@ -145,7 +147,7 @@ namespace pacman
                                 break;
                             //case 3: if cursorUp, goto pos2
                             case 3:
-                                if (cursorUp)
+                                if (keyCheck.KeyCode == Keys.Up)
                                 {
                                     cursorPos = 2;
                                     //erase pos3
@@ -159,12 +161,13 @@ namespace pacman
                     else
                     {
                         //do nothing -- no cursor
-                    }*/
+                    }
                 }//end if(showMenu == true)
                 else
                 {
 
                     //fruit spawning counter
+                    fruitCounter++;
                     if ((fruitCounter > 100) && (fruitCounter < 1000))
                     {
                         g_fruit = this.CreateGraphics();
