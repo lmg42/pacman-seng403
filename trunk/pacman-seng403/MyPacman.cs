@@ -50,7 +50,7 @@ namespace pacman
             whichQuadrant = 0;
             dotFound = false;
             bigdotFound = false;
-            whenPacmanEatsBigdot = new DateTime(0, 0, 0, 0, 0, 0);//year, month, day, hour, minute, second 
+            whenPacmanEatsBigdot = new DateTime();//year, month, day, hour, minute, second 
             timePastFromWhenPacmanEatsBigdot = new TimeSpan();
             superPacman = false;
             numberofEdibles = CountAllEdibles();
@@ -166,26 +166,27 @@ namespace pacman
             //in superpacman mode, pacman can kill ghosts. the duration is 10 seconds. 
             if (superPacman)
             {
+                
                 DateTime currentTime = DateTime.Now;
                 timePastFromWhenPacmanEatsBigdot = currentTime - whenPacmanEatsBigdot;
                 if (timePastFromWhenPacmanEatsBigdot.Seconds <= 10)
                 {
-                    if (CheckCollision(CurrentGameCharacters.pacman, CurrentGameCharacters.inky))
+                    if (CheckCollision(CurrentGameCharacters.inky,CurrentGameCharacters.pacman))
                     {
                         CurrentGameCharacters.inky.kill();
                         GameData.incrementScore(500);
                     }
-                    if (CheckCollision(CurrentGameCharacters.pacman, CurrentGameCharacters.pinky))
+                    if (CheckCollision(CurrentGameCharacters.pinky, CurrentGameCharacters.pacman))
                     {
                         CurrentGameCharacters.pinky.kill();
                         GameData.incrementScore(500);
                     }
-                    if (CheckCollision(CurrentGameCharacters.pacman, CurrentGameCharacters.clyde))
+                    if (CheckCollision(CurrentGameCharacters.clyde, CurrentGameCharacters.pacman))
                     {
                         CurrentGameCharacters.clyde.kill();
                         GameData.incrementScore(500);
                     }
-                    if (CheckCollision(CurrentGameCharacters.pacman, CurrentGameCharacters.blinky))
+                    if (CheckCollision(CurrentGameCharacters.blinky, CurrentGameCharacters.pacman))
                     {
                         CurrentGameCharacters.blinky.kill();
                         GameData.incrementScore(500);
@@ -199,11 +200,13 @@ namespace pacman
                     CurrentGameCharacters.clyde.makeStrong();
                     CurrentGameCharacters.blinky.makeStrong();
                 }
+                
             }
             //not in superpacman mode, pacman will be killed if he is caught by any of the ghosts. 
             if (!superPacman)
             {
-                if (CheckCollision(CurrentGameCharacters.pacman, CurrentGameCharacters.inky) || CheckCollision(CurrentGameCharacters.pacman, CurrentGameCharacters.pinky) || CheckCollision(CurrentGameCharacters.pacman, CurrentGameCharacters.clyde) || CheckCollision(CurrentGameCharacters.pacman, CurrentGameCharacters.blinky))
+
+                if (CheckCollision(CurrentGameCharacters.inky, CurrentGameCharacters.pacman) || CheckCollision(CurrentGameCharacters.pinky, CurrentGameCharacters.pacman) || CheckCollision(CurrentGameCharacters.clyde, CurrentGameCharacters.pacman) || CheckCollision(CurrentGameCharacters.blinky, CurrentGameCharacters.pacman))
                 {
                     GameData.decrementNumLives();
                     x = 250; //re-place the pacman
@@ -231,15 +234,15 @@ namespace pacman
             return pacmanTowarding;
         }
 
-        public bool CheckCollision(GameCharacter a, GameCharacter b)
+        public bool CheckCollision(GameCharacter a, MyPacman b)
         {
-            double XDifference;
-            double YDifference;
+            int XDifference;
+            int YDifference;
 
-            XDifference = a.getX() - b.getX();
-            YDifference = a.getY() - b.getY();
+            XDifference = Math.Abs(a.getX() - b.getX());
+            YDifference = Math.Abs(a.getY() - b.getY());
 
-            if ((Math.Abs(XDifference) < BLOCKSIZE / 3) && (Math.Abs(YDifference) < BLOCKSIZE / 3))
+            if ((XDifference < (a.getRadius() + b.getRadius())) && (YDifference < (a.getRadius() + b.getRadius())))
                 return true;
             else
                 return false;
@@ -325,6 +328,8 @@ namespace pacman
                     }
                     return false;
                     break;
+                default:
+                    return false;
             }
         }
         public bool DetermineCollisionBetweenPacmanAndBigdots()

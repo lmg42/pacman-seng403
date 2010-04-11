@@ -32,6 +32,16 @@ namespace pacman
             weak = false;
         }
 
+        public void makeSmart()
+        {
+            smart = true;
+        }
+
+        public void makeStupid()
+        {
+            smart = false;
+        }
+
         public bool isWeak() {
             return weak;
         }
