@@ -7,10 +7,10 @@ namespace pacman
 {
     public class GameData
     {
-        private int score;
-        private int level;
-        private int numLives;
-        private Boolean gameDone;
+        public static int score;
+        public static int level;
+        public static int numLives;
+        public static Boolean gameDone;
 
        public GameData() {
             score = 0;
