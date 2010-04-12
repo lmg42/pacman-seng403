@@ -44,8 +44,6 @@ namespace pacman
             private int fruitCounter = 0;
 
             private RegularDots regDots = new RegularDots();
-            private static int sizeRegDots = CurrentGameCharacters.dots_bottomleft.Count + CurrentGameCharacters.dots_bottomright.Count + CurrentGameCharacters.dots_topleft.Count + CurrentGameCharacters.dots_topright.Count;
-            private Graphics[] g_regularDot = new Graphics[sizeRegDots+1];
             private BigDots bigDots = new BigDots();
             private Graphics[] g_largeDot = new Graphics[4];
 
@@ -182,10 +180,13 @@ namespace pacman
                         //print regular dots
                         int count = 0;
                         int tempCount = 0;
+                        int sizeRegDots = CurrentGameCharacters.dots_bottomleft.Count + CurrentGameCharacters.dots_bottomright.Count + CurrentGameCharacters.dots_topleft.Count + CurrentGameCharacters.dots_topright.Count;
+                        Graphics[] g_regularDot = new Graphics[sizeRegDots];
                         while (count < CurrentGameCharacters.dots_topleft.Count)
                         {
                             Console.WriteLine("Count is " + count);
                             g_regularDot[count] = this.CreateGraphics();
+                            g_regularDot[0] = this.CreateGraphics();
                             g_regularDot[count].DrawEllipse(new Pen(Color.White, 3), CurrentGameCharacters.dots_topleft[count].getX(), CurrentGameCharacters.dots_topleft[count].getY(), 1, 1);
                             count++;
                         }
