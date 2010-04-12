@@ -54,6 +54,7 @@
     <Compile Include="GameCharacter.cs" />
     <Compile Include="GameData.cs" />
     <Compile Include="Ghost.cs" />
+    <Compile Include="KeystrokeInput.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="MyPacman.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,6 +63,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="RegularDots.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

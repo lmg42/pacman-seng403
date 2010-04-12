@@ -43,6 +43,9 @@ namespace pacman
             private Bitmap b_fruit = null;
             private int fruitCounter = 0;
 
+            private Graphics[] g_regularDot = new Graphics[54];
+            private Graphics g_largeDot = null;
+
             //Creates basic window - 'Pacman' will be in the title bar, size is Size, and 
             //background colour is black
             public AForm()
@@ -165,14 +168,41 @@ namespace pacman
 
                     if (GameData.gameDone)
                     {
-                        e.Graphics.DrawString("GAME OVER", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 250, 250);
-                        e.Graphics.DrawString("Press Enter to Continue", new Font("Ouhod", 12, FontStyle.Regular), Brushes.Yellow, 250, 280);
+                        e.Graphics.DrawString("GAME OVER", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 200, 200);
+                        e.Graphics.DrawString("Press Enter to Continue", new Font("Ouhod", 12, FontStyle.Regular), Brushes.Yellow, 200, 230);
                         if (keyCheck.KeyCode == Keys.Enter)
                             showMenu = true;
                     }
 
                     else
                     {
+                        //print regular dots
+                        int count = 0;
+                        int tempCount = 0;
+                        while (count < CurrentGameCharacters.dots_topleft.Count)
+                        {
+                            g_regularDot[count] = this.CreateGraphics();
+                            g_regularDot[count].DrawEllipse(new Pen(Color.White, 3), CurrentGameCharacters.dots_topleft[count].getX(), CurrentGameCharacters.dots_topleft[count].getY(), 1, 1);
+                        }
+                        tempCount += CurrentGameCharacters.dots_topleft.Count;
+                        while (count < (CurrentGameCharacters.dots_topright.Count+tempCount))
+                        {
+                            g_regularDot[count] = this.CreateGraphics();
+                            g_regularDot[count].DrawEllipse(new Pen(Color.White, 3), CurrentGameCharacters.dots_topright[count-tempCount].getX(), CurrentGameCharacters.dots_topright[count-tempCount].getY(), 1, 1);
+                        }
+                        tempCount += CurrentGameCharacters.dots_topright.Count;
+                        while (count < CurrentGameCharacters.dots_bottomleft.Count)
+                        {
+                            g_regularDot[count] = this.CreateGraphics();
+                            g_regularDot[count].DrawEllipse(new Pen(Color.White, 3), CurrentGameCharacters.dots_bottomleft[count-tempCount].getX(), CurrentGameCharacters.dots_bottomleft[count-tempCount].getY(), 1, 1);
+                        }
+                        tempCount += CurrentGameCharacters.dots_bottomleft.Count;
+                        while (count < (CurrentGameCharacters.dots_bottomright.Count + tempCount))
+                        {
+                            g_regularDot[count] = this.CreateGraphics();
+                            g_regularDot[count].DrawEllipse(new Pen(Color.White, 3), CurrentGameCharacters.dots_bottomleft[count-tempCount].getX(), CurrentGameCharacters.dots_bottomleft[count-tempCount].getY(), 1, 1);
+                        }
+
                         //fruit spawning counter
                         fruitCounter++;
                         if ((fruitCounter > 100) && (fruitCounter < 1000))
