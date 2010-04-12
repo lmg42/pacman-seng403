@@ -326,8 +326,8 @@ namespace pacman
                         }
 
                         //create rectangle at the bottom so we can write score, lives, and level over top
-                        e.Graphics.DrawRectangle(new Pen(Color.Black), 0, 480, 505, 20);
-                        e.Graphics.FillRectangle(Brushes.Black, 0, 480, 505, 20);
+                        e.Graphics.DrawRectangle(new Pen(Color.Black), 0, 485, 500, 20);
+                        e.Graphics.FillRectangle(Brushes.Black, 0, 485, 500, 20);
 
                         //score
                         e.Graphics.DrawString("Score: " + GameData.score, new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 2, 480);
