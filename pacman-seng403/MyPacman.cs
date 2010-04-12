@@ -266,19 +266,21 @@ namespace pacman
         }
         public void DetermineWhichQuardant()
         {
-            if (x <= 249 && y <= 249)
+            if (x < 260 && y < 260)
                 whichQuadrant = Directions.UP_LEFT;
-            if (x > 249 && y <= 249)
+            if (x > 260 && y < 260)
                 whichQuadrant = Directions.UP_RIGHT;
-            if (x <= 249 && y > 249)
+            if (x < 260 && y > 260)
                 whichQuadrant = Directions.DOWN_LEFT;
-            if (x > 249 && y > 249)
+            if (x > 260 && y > 260)
                 whichQuadrant = Directions.DOWN_RIGHT;
         }
         public bool DetermineCollisionBetweenPacmanAndDots()
         {
             dotFound = false;
             DetermineWhichQuardant();
+            Console.WriteLine(whichQuadrant);
+            Console.WriteLine(numberofEdibles);
             switch (whichQuadrant)
             {
                 case Directions.UP_LEFT:

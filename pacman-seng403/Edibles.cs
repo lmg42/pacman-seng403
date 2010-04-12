@@ -13,6 +13,12 @@ namespace pacman
             this.x = X;
             this.y = Y;
             this.type = type;
+            if (type == "smallDot") {
+                this.radius = 3;
+            }
+            else if (type == "bigDot") {
+                this.radius = 5;
+            }
         }
 
         public String getType() {
