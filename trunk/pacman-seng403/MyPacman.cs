@@ -279,8 +279,6 @@ namespace pacman
         {
             dotFound = false;
             DetermineWhichQuardant();
-            Console.WriteLine(whichQuadrant);
-            Console.WriteLine(numberofEdibles);
             switch (whichQuadrant)
             {
                 case Directions.UP_LEFT:

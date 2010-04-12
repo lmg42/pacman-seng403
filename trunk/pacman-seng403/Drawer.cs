@@ -209,7 +209,7 @@ namespace pacman
                         }
                         
                         //print big dots
-                        for (int i = 0; i < 4; i++)
+                        for (int i = 0; i < CurrentGameCharacters.bigdots.Count; i++)
                         {
                             g_largeDot[i] = this.CreateGraphics();
                             g_largeDot[i].DrawEllipse(new Pen(Color.White, 5), CurrentGameCharacters.bigdots[i].getX(), CurrentGameCharacters.bigdots[i].getY(), 1, 1);
