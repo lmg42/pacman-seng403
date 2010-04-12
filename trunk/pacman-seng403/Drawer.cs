@@ -22,7 +22,7 @@ namespace pacman
         public class AForm : Form
         {
 
-            private bool showMenu = false;
+            private bool showMenu = true;
             private bool firstTime = true;
             private static bool cursorUp = false;
             private static bool cursorDown = false;
@@ -217,7 +217,7 @@ namespace pacman
 
                         //fruit spawning counter
                         fruitCounter++;
-                        if ((fruitCounter > 100) && (fruitCounter < 1000))
+                        if ((fruitCounter > 700) && (fruitCounter < 2000))
                         {
                             g_fruit = this.CreateGraphics();
                             g_fruit.DrawEllipse(new Pen(Color.Teal, 6), 250, 250, 1, 1);
