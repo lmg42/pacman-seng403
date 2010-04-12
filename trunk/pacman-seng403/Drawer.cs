@@ -182,7 +182,7 @@ namespace pacman
                         //print regular dots
                         int count = 0;
                         int tempCount = 0;
-                        while (count < CurrentGameCharacters.dots_topleft.Count)
+                        while (count < (CurrentGameCharacters.dots_topleft.Count-1))
                         {
                             g_regularDot[count] = this.CreateGraphics();
                             g_regularDot[count].DrawEllipse(new Pen(Color.White, 3), CurrentGameCharacters.dots_topleft[count].getX(), CurrentGameCharacters.dots_topleft[count].getY(), 1, 1);
