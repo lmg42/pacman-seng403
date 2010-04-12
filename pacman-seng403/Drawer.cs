@@ -367,7 +367,7 @@ namespace pacman
                     {
 
                     }
-                    Thread.Sleep(10);
+                    Thread.Sleep(5);
                 }
             }
 
