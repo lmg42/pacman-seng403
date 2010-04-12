@@ -213,7 +213,7 @@ namespace pacman
                         for (int i = 0; i < 4; i++)
                         {
                             g_bigDot[i] = this.CreateGraphics();
-                            g_bigDot[i].DrawEllipse(newPen(Color.White, 
+                            g_bigDot[i].DrawEllipse(newPen(Color.White, 5), CurrentGameCharacters.bigdots[i].getX(), CurrentGameCharacters.bigdots[i].getY(), 1, 1);
                         }
 
                         //fruit spawning counter
