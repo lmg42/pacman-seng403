@@ -44,7 +44,8 @@ namespace pacman
             private int fruitCounter = 0;
 
             private RegularDots regDots = new RegularDots();
-            private Graphics[] g_regularDot = new Graphics[55];
+            private static int sizeRegDots = CurrentGameCharacters.dots_bottomleft.Count + CurrentGameCharacters.dots_bottomright.Count + CurrentGameCharacters.dots_topleft.Count + CurrentGameCharacters.dots_topright.Count;
+            private Graphics[] g_regularDot = new Graphics[sizeRegDots];
             private BigDots bigDots = new BigDots();
             private Graphics[] g_largeDot = new Graphics[4];
 
@@ -212,8 +213,8 @@ namespace pacman
                         //print big dots
                         for (int i = 0; i < 4; i++)
                         {
-                            g_bigDot[i] = this.CreateGraphics();
-                            g_bigDot[i].DrawEllipse(newPen(Color.White, 5), CurrentGameCharacters.bigdots[i].getX(), CurrentGameCharacters.bigdots[i].getY(), 1, 1);
+                            g_largeDot[i] = this.CreateGraphics();
+                            g_largeDot[i].DrawEllipse(new Pen(Color.White, 5), CurrentGameCharacters.bigdots[i].getX(), CurrentGameCharacters.bigdots[i].getY(), 1, 1);
                         }
 
                         //fruit spawning counter
