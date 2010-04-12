@@ -186,7 +186,6 @@ namespace pacman
                         {
                             Console.WriteLine("Count is " + count);
                             g_regularDot[count] = this.CreateGraphics();
-                            g_regularDot[0] = this.CreateGraphics();
                             g_regularDot[count].DrawEllipse(new Pen(Color.White, 3), CurrentGameCharacters.dots_topleft[count].getX(), CurrentGameCharacters.dots_topleft[count].getY(), 1, 1);
                             count++;
                         }
@@ -198,7 +197,7 @@ namespace pacman
                             count++;
                         }
                         tempCount += CurrentGameCharacters.dots_topright.Count;
-                        while (count < CurrentGameCharacters.dots_bottomleft.Count)
+                        while (count < (CurrentGameCharacters.dots_bottomleft.Count+tempCount))
                         {
                             g_regularDot[count] = this.CreateGraphics();
                             g_regularDot[count].DrawEllipse(new Pen(Color.White, 3), CurrentGameCharacters.dots_bottomleft[count-tempCount].getX(), CurrentGameCharacters.dots_bottomleft[count-tempCount].getY(), 1, 1);
@@ -208,7 +207,7 @@ namespace pacman
                         while (count < (CurrentGameCharacters.dots_bottomright.Count + tempCount))
                         {
                             g_regularDot[count] = this.CreateGraphics();
-                            g_regularDot[count].DrawEllipse(new Pen(Color.White, 3), CurrentGameCharacters.dots_bottomleft[count-tempCount].getX(), CurrentGameCharacters.dots_bottomleft[count-tempCount].getY(), 1, 1);
+                            g_regularDot[count].DrawEllipse(new Pen(Color.White, 3), CurrentGameCharacters.dots_bottomright[count-tempCount].getX(), CurrentGameCharacters.dots_bottomright[count-tempCount].getY(), 1, 1);
                             count++;
                         }
 
