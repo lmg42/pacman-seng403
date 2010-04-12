@@ -320,6 +320,7 @@ namespace pacman
 
                         //lives left
                         int tempLives = GameData.numLives;
+                        tempLives++;
                         if (tempLives == 1)
                             e.Graphics.DrawString("1 life", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 225, 480);
                         else
