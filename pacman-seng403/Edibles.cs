@@ -17,6 +17,9 @@ namespace pacman
                 this.radius = 3;
             }
             else if (type == "bigDot") {
+                this.radius = 4;
+            }
+            else if (type == "fruit") {
                 this.radius = 5;
             }
         }

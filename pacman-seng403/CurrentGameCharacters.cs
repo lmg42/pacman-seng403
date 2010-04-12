@@ -19,6 +19,7 @@ namespace pacman
         public static List<Edibles> dots_bottomright = new List<Edibles>();
         public static List<Edibles> dots_bottomleft = new List<Edibles>();
         public static List<Edibles> bigdots = new List<Edibles>();
+        public static Edibles fruit = null;
  
     }
 }
