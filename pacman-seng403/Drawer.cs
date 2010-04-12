@@ -328,18 +328,18 @@ namespace pacman
                         e.Graphics.FillRectangle(Brushes.Black, 0, 485, 500, 20);
 
                         //score
-                        e.Graphics.DrawString("Score: " + GameData.score, new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 2, 480);
+                        e.Graphics.DrawString("Score: " + GameData.score, new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 2, 485);
 
                         //lives left
                         int tempLives = GameData.numLives;
                         tempLives++;
                         if (tempLives == 1)
-                            e.Graphics.DrawString("1 life", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 225, 480);
+                            e.Graphics.DrawString("1 life", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 225, 485);
                         else
-                            e.Graphics.DrawString(tempLives + " lives", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 225, 480);
+                            e.Graphics.DrawString(tempLives + " lives", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 225, 485);
 
                         //level
-                        e.Graphics.DrawString("Level " + GameData.level, new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 425, 480);
+                        e.Graphics.DrawString("Level " + GameData.level, new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 425, 485);
 
                     }
 
