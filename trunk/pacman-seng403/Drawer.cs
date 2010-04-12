@@ -43,6 +43,7 @@ namespace pacman
             private Bitmap b_fruit = null;
             private int fruitCounter = 0;
 
+            private RegularDots rd = new RegularDots();
             private Graphics[] g_regularDot = new Graphics[54];
             private Graphics g_largeDot = null;
 
