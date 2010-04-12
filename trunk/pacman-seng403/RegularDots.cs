@@ -25,7 +25,7 @@ namespace pacman
                 {
                     if(Map.getMapEntry(i,j) != Directions.NONE) {
                         Edibles e = new Edibles(((i * 20) + 10), ((j * 20) + 10), "smallDot");
-                        CurrentGameCharacters.dots_topright.Add(e);
+                        CurrentGameCharacters.dots_bottomleft.Add(e);
                     }
                 }
             }
@@ -36,7 +36,7 @@ namespace pacman
                     if (Map.getMapEntry(i, j) != Directions.NONE)
                     {
                         Edibles e = new Edibles(((i * 20) + 10), ((j * 20) + 10), "smallDot");
-                        CurrentGameCharacters.dots_bottomleft.Add(e);
+                        CurrentGameCharacters.dots_topright.Add(e);
                     }
                 }
             }

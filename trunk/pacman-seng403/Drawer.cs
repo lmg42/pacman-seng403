@@ -211,7 +211,7 @@ namespace pacman
                             g_regularDot[count].DrawEllipse(new Pen(Color.White, 3), CurrentGameCharacters.dots_bottomright[count-tempCount].getX(), CurrentGameCharacters.dots_bottomright[count-tempCount].getY(), 1, 1);
                             count++;
                         }
-
+                        
                         //print big dots
                         for (int i = 0; i < 4; i++)
                         {
