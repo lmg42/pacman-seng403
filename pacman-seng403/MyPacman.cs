@@ -211,6 +211,11 @@ namespace pacman
                     GameData.decrementNumLives();
                     x = 250; //re-place the pacman
                     y = 250;
+                    pacmanXDeriction = 0;
+                    pacmanYDeriction = 0;
+                    userInputXDeriction = 0;
+                    userInputYDeriction = 0;
+
                 }
 
             }
