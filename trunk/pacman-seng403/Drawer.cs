@@ -170,7 +170,7 @@ namespace pacman
                     if (GameData.gameDone)
                     {
                         e.Graphics.DrawString("GAME OVER", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 200, 200);
-                        e.Graphics.DrawString("Press Enter to Continue", new Font("Ouhod", 12, FontStyle.Regular), Brushes.Yellow, 200, 230);
+                        e.Graphics.DrawString("Press Enter to Continue", new Font("Ouhod", 12, FontStyle.Regular), Brushes.Yellow, 150, 230);
                         if (keyCheck.KeyCode == Keys.Enter)
                             showMenu = true;
                     }
@@ -184,7 +184,6 @@ namespace pacman
                         Graphics[] g_regularDot = new Graphics[sizeRegDots];
                         while (count < CurrentGameCharacters.dots_topleft.Count)
                         {
-                            Console.WriteLine("Count is " + count);
                             g_regularDot[count] = this.CreateGraphics();
                             g_regularDot[count].DrawEllipse(new Pen(Color.White, 3), CurrentGameCharacters.dots_topleft[count].getX(), CurrentGameCharacters.dots_topleft[count].getY(), 1, 1);
                             count++;
@@ -327,8 +326,8 @@ namespace pacman
                         }
 
                         //create rectangle at the bottom so we can write score, lives, and level over top
-                        e.Graphics.DrawRectangle(new Pen(Color.Chocolate), 0, 480, 505, 20);
-                        e.Graphics.FillRectangle(Brushes.Chocolate, 0, 480, 505, 20);
+                        e.Graphics.DrawRectangle(new Pen(Color.Black), 0, 480, 505, 20);
+                        e.Graphics.FillRectangle(Brushes.Black, 0, 480, 505, 20);
 
                         //score
                         e.Graphics.DrawString("Score: " + GameData.score, new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 2, 480);
