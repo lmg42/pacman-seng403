@@ -263,7 +263,9 @@ namespace pacman
 
 
                             g_pacman.DrawEllipse(new Pen(Color.Black, 12), oldx, oldy, 1, 1);
+                            g_pacman.FillEllipse(Brushes.Black, oldx, oldy, 1, 1);
                             g_pacman.DrawEllipse(new Pen(Color.Yellow, 12), CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 1, 1);
+                            g_pacman.FillEllipse(Brushes.Yellow, CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 1, 1); 
                         }
 
 
