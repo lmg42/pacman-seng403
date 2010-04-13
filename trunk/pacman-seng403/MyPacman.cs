@@ -390,6 +390,11 @@ namespace pacman
             return all;
 
         }
+
+        public bool isSuperPacman()
+        {
+            return superPacman;
+        }
         /* 
         void main() //do some testing on pacman movement 
         { 
