@@ -22,13 +22,14 @@ namespace pacman
         public class AForm : Form
         {
 
-            private bool showMenu = true;
+            private bool showMenu = false;
             private bool firstTime = true;
             private static bool cursorUp = false;
             private static bool cursorDown = false;
             private static bool enterPushed = false;
             private int cursorPos = 1;
             private Graphics bg = null;
+            
 
 
             private Graphics g_pacman = null;
@@ -46,6 +47,7 @@ namespace pacman
             private RegularDots regDots = new RegularDots();
             private BigDots bigDots = new BigDots();
             private Graphics[] g_largeDot = new Graphics[4];
+            private int dotUpdate = 1;
 
             //Creates basic window - 'Pacman' will be in the title bar, size is Size, and 
             //background colour is black
@@ -177,35 +179,42 @@ namespace pacman
 
                     else
                     {
-                        //print regular dots
-                        int count = 0;
-                        int tempCount = 0;
-                        int sizeRegDots = CurrentGameCharacters.dots_bottomleft.Count + CurrentGameCharacters.dots_bottomright.Count + CurrentGameCharacters.dots_topleft.Count + CurrentGameCharacters.dots_topright.Count;
-                        Graphics[] g_regularDot = new Graphics[sizeRegDots];
-                        for (int i = 0; i < g_regularDot.Length; i++)
-                            g_regularDot[i] = this.CreateGraphics();
-                        while (count < CurrentGameCharacters.dots_topleft.Count)
+                        if (dotUpdate > 4)
                         {
-                            g_regularDot[count].DrawEllipse(new Pen(Color.White, 3), CurrentGameCharacters.dots_topleft[count].getX(), CurrentGameCharacters.dots_topleft[count].getY(), 1, 1);
-                            count++;
+                            //print regular dots
+                            int count = 0;
+                            int tempCount = 0;
+                            int sizeRegDots = CurrentGameCharacters.dots_bottomleft.Count + CurrentGameCharacters.dots_bottomright.Count + CurrentGameCharacters.dots_topleft.Count + CurrentGameCharacters.dots_topright.Count;
+                            Graphics[] g_regularDot = new Graphics[sizeRegDots];
+                            for (int i = 0; i < g_regularDot.Length; i++)
+                                g_regularDot[i] = this.CreateGraphics();
+                            while (count < CurrentGameCharacters.dots_topleft.Count)
+                            {
+                                g_regularDot[count].DrawEllipse(new Pen(Color.White, 3), CurrentGameCharacters.dots_topleft[count].getX(), CurrentGameCharacters.dots_topleft[count].getY(), 1, 1);
+                                count++;
+                            }
+                            tempCount += CurrentGameCharacters.dots_topleft.Count;
+                            while (count < (CurrentGameCharacters.dots_topright.Count + tempCount))
+                            {
+                                g_regularDot[count].DrawEllipse(new Pen(Color.White, 3), CurrentGameCharacters.dots_topright[count - tempCount].getX(), CurrentGameCharacters.dots_topright[count - tempCount].getY(), 1, 1);
+                                count++;
+                            }
+                            tempCount += CurrentGameCharacters.dots_topright.Count;
+                            while (count < (CurrentGameCharacters.dots_bottomleft.Count + tempCount))
+                            {
+                                g_regularDot[count].DrawEllipse(new Pen(Color.White, 3), CurrentGameCharacters.dots_bottomleft[count - tempCount].getX(), CurrentGameCharacters.dots_bottomleft[count - tempCount].getY(), 1, 1);
+                                count++;
+                            }
+                            tempCount += CurrentGameCharacters.dots_bottomleft.Count;
+                            while (count < (CurrentGameCharacters.dots_bottomright.Count + tempCount))
+                            {
+                                g_regularDot[count].DrawEllipse(new Pen(Color.White, 3), CurrentGameCharacters.dots_bottomright[count - tempCount].getX(), CurrentGameCharacters.dots_bottomright[count - tempCount].getY(), 1, 1);
+                                count++;
+                            }
+                            dotUpdate = 0;
                         }
-                        tempCount += CurrentGameCharacters.dots_topleft.Count;
-                        while (count < (CurrentGameCharacters.dots_topright.Count+tempCount))
-                        {
-                            g_regularDot[count].DrawEllipse(new Pen(Color.White, 3), CurrentGameCharacters.dots_topright[count-tempCount].getX(), CurrentGameCharacters.dots_topright[count-tempCount].getY(), 1, 1);
-                            count++;
-                        }
-                        tempCount += CurrentGameCharacters.dots_topright.Count;
-                        while (count < (CurrentGameCharacters.dots_bottomleft.Count+tempCount))
-                        {
-                            g_regularDot[count].DrawEllipse(new Pen(Color.White, 3), CurrentGameCharacters.dots_bottomleft[count-tempCount].getX(), CurrentGameCharacters.dots_bottomleft[count-tempCount].getY(), 1, 1);
-                            count++;
-                        }
-                        tempCount += CurrentGameCharacters.dots_bottomleft.Count;
-                        while (count < (CurrentGameCharacters.dots_bottomright.Count + tempCount))
-                        {
-                            g_regularDot[count].DrawEllipse(new Pen(Color.White, 3), CurrentGameCharacters.dots_bottomright[count-tempCount].getX(), CurrentGameCharacters.dots_bottomright[count-tempCount].getY(), 1, 1);
-                            count++;
+                        else {
+                            dotUpdate++;
                         }
                         
                         //print big dots
@@ -323,23 +332,28 @@ namespace pacman
                             g_clyde.DrawEllipse(new Pen(Color.Orange, 6), CurrentGameCharacters.clyde.getX(), CurrentGameCharacters.clyde.getY(), 5, 5);
                         }
 
-                        //create rectangle at the bottom so we can write score, lives, and level over top
-                        e.Graphics.DrawRectangle(new Pen(Color.Black), 0, 485, 500, 20);
-                        e.Graphics.FillRectangle(Brushes.Black, 0, 485, 500, 20);
+                        if (GameData.dataUpdate == true)
+                        {
+                            //create rectangle at the bottom so we can write score, lives, and level over top
+                            e.Graphics.DrawRectangle(new Pen(Color.Black), 0, 485, 500, 20);
+                            e.Graphics.FillRectangle(Brushes.Black, 0, 485, 500, 20);
 
-                        //score
-                        e.Graphics.DrawString("Score: " + GameData.score, new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 2, 485);
+                            //score
+                            e.Graphics.DrawString("Score: " + GameData.score, new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 2, 485);
 
-                        //lives left
-                        int tempLives = GameData.numLives;
-                        tempLives++;
-                        if (tempLives == 1)
-                            e.Graphics.DrawString("1 life", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 225, 485);
-                        else
-                            e.Graphics.DrawString(tempLives + " lives", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 225, 485);
+                            //lives left
+                            int tempLives = GameData.numLives;
+                            tempLives++;
+                            if (tempLives == 1)
+                                e.Graphics.DrawString("1 life", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 225, 485);
+                            else
+                                e.Graphics.DrawString(tempLives + " lives", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 225, 485);
 
-                        //level
-                        e.Graphics.DrawString("Level " + GameData.level, new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 425, 485);
+                            //level
+                            e.Graphics.DrawString("Level " + GameData.level, new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 425, 485);
+
+                            GameData.dataUpdate = false;
+                        }
 
                     }
 
