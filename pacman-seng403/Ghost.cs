@@ -12,10 +12,14 @@ namespace pacman
         protected bool weak=false;
         protected bool smart;
         protected int numScreenUpdates;
+        protected bool currentlySmart;
+        protected uint smartCounter;
 
         public Ghost(int start_x, int start_y, Directions dir, bool isSmart)
         {
             smart = isSmart;
+            currentlySmart = isSmart;
+            smartCounter = 0;
 			radius = 4;
             x = start_x*Map.BLOCKSIZE + (Map.BLOCKSIZE/2);
             y = start_y*Map.BLOCKSIZE + (Map.BLOCKSIZE/2);
@@ -47,18 +51,16 @@ namespace pacman
         }
 
         public void kill() {
-            if (weak == true) {
-                weak = false;
-                //reset position to center
-                y = (double)(12 * Map.BLOCKSIZE + Map.BLOCKSIZE / 2);
-                x = (double)(12 * Map.BLOCKSIZE + Map.BLOCKSIZE / 2);
-                direction = Directions.UP;
-            }
+            weak = false;
+            //reset position to center
+            y = (double)(12 * Map.BLOCKSIZE + Map.BLOCKSIZE / 2);
+            x = (double)(12 * Map.BLOCKSIZE + Map.BLOCKSIZE / 2);
+            direction = Directions.UP;
         }
 
         public void screenUpdate()
         {
-            if (smart && !weak)
+            if (currentlySmart && !weak)
             {
                 if (numScreenUpdates < 20)
                 {
@@ -231,6 +233,13 @@ namespace pacman
                     //this should never happen
                     //put error handling code here
                     Console.WriteLine("StupidGhost.numScreenUpdates is over 20");
+                }
+            }
+            if (smart) {
+                smartCounter++;
+                if (smartCounter >= 100) {
+                    smartCounter = 0;
+                    currentlySmart = !currentlySmart;
                 }
             }
         }
