@@ -40,3 +40,10 @@ C:\Checkout\pacman-seng403\pacman-seng403\bin\Debug\pacmanSENG403.pdb
 C:\Checkout\pacman-seng403\pacman-seng403\obj\Debug\ResolveAssemblyReference.cache
 C:\Checkout\pacman-seng403\pacman-seng403\obj\Debug\pacmanSENG403.Properties.Resources.resources
 C:\Checkout\pacman-seng403\pacman-seng403\obj\Debug\pacmanSENG403.csproj.GenerateResource.Cache
+C:\Users\abc\Desktop\pacman\pacman-seng403\pacman-seng403\obj\Debug\pacmanSENG403.exe
+C:\Users\abc\Desktop\pacman\pacman-seng403\pacman-seng403\obj\Debug\pacmanSENG403.pdb
+C:\Users\abc\Desktop\pacman\pacman-seng403\pacman-seng403\bin\Debug\pacmanSENG403.exe
+C:\Users\abc\Desktop\pacman\pacman-seng403\pacman-seng403\bin\Debug\pacmanSENG403.pdb
+C:\Users\abc\Desktop\pacman\pacman-seng403\pacman-seng403\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\abc\Desktop\pacman\pacman-seng403\pacman-seng403\obj\Debug\pacmanSENG403.Properties.Resources.resources
+C:\Users\abc\Desktop\pacman\pacman-seng403\pacman-seng403\obj\Debug\pacmanSENG403.csproj.GenerateResource.Cache
