@@ -304,11 +304,19 @@ namespace pacman
                             g_pacman.FillRectangle(new SolidBrush(Color.Black), oldx, oldy, 20, 20);
                             g_pacman.DrawImage(b_pacman, this.ClientRectangle, new Rectangle(CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 20, 20), GraphicsUnit.Pixel);*/
 
-
                             g_pacman.DrawEllipse(new Pen(Color.Black, 12), oldx, oldy, 1, 1);
                             g_pacman.FillEllipse(Brushes.Black, oldx, oldy, 1, 1);
-                            g_pacman.DrawEllipse(new Pen(Color.Yellow, 12), CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 1, 1);
-                            g_pacman.FillEllipse(Brushes.Yellow, CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 1, 1); 
+
+                            if (CurrentGameCharacters.pacman.isSuperPacman())
+                            {
+                                g_pacman.DrawEllipse(new Pen(Color.Violet, 12), CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 1, 1);
+                                g_pacman.FillEllipse(Brushes.Violet, CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 1, 1);
+                            }
+                            else
+                            {
+                                g_pacman.DrawEllipse(new Pen(Color.Yellow, 12), CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 1, 1);
+                                g_pacman.FillEllipse(Brushes.Yellow, CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 1, 1);
+                            }
                         }
 
 
