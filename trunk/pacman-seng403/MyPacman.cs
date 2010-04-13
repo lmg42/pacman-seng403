@@ -27,6 +27,7 @@ namespace pacman
         private Directions whichQuadrant;
         private bool dotFound;
         private bool bigdotFound;
+        private bool fruitFound;
         private DateTime whenPacmanEatsBigdot;
         private TimeSpan timePastFromWhenPacmanEatsBigdot;
         private bool superPacman;
@@ -152,6 +153,10 @@ namespace pacman
             {
                 GameData.incrementScore(10);
             }
+            if (DetermineCollisionBetweenPacmanAndFruit())
+            {
+                GameData.incrementScore(200);
+            }
             //update score, ghosts'status and pacman's status when pacman eats big dot 
             if (DetermineCollisionBetweenPacmanAndBigdots())
             {
@@ -211,7 +216,7 @@ namespace pacman
                     GameData.decrementNumLives();
                     x = 250; //re-place the pacman
                     y = 250;
-                    pacmanXDeriction = 0;
+                    pacmanXDeriction = 0; //initialize pacman's movement
                     pacmanYDeriction = 0;
                     userInputXDeriction = 0;
                     userInputYDeriction = 0;
@@ -222,7 +227,7 @@ namespace pacman
             //when pacman eats all the dots(including big dots), the player wins. 
             if (numberofEdibles == 0)
             {
-                //game finished function 
+                //call game finished function 
             }
         }
         public int getX()
@@ -349,6 +354,22 @@ namespace pacman
                     numberofEdibles--;
                     return true;
                 }
+            }
+            return false;
+        }
+        public bool DetermineCollisionBetweenPacmanAndFruit()
+        {
+            fruitFound = false;
+            if (CurrentGameCharacters.fruit != null)
+            {
+                fruitFound = CheckCollision(CurrentGameCharacters.fruit, CurrentGameCharacters.pacman);
+                if (fruitFound == true)
+                {
+                    CurrentGameCharacters.fruit = null;
+                    numberofEdibles--;
+                    return true;
+                }
+                return false;
             }
             return false;
         }
