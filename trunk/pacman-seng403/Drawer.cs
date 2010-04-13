@@ -230,9 +230,11 @@ namespace pacman
                         if(CurrentGameCharacters.fruit != null){
                             g_fruit = this.CreateGraphics();
                             g_fruit.DrawEllipse(new Pen(Color.Teal, 6), 250, 250, 1, 1);
+                            fruitCounter = 2001;
                             /*b_fruit = this.CreateGraphics();
                             g_fruit = DrawImage(b_fruit, this.ClientRectangle, new Rectangle(), GraphicsUnit.Pixel);*/
                         }
+
                         // Pacman Movement
                         if (g_pacman == null)
                         {
