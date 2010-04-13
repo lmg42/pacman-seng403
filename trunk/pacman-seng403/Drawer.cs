@@ -19,13 +19,15 @@ namespace pacman
         public class AForm : Form
         {
 
-            private bool showMenu = false;
+            private bool showMenu = true;
+            private bool updateMenu = true;
             private bool firstTime = true;
             private static bool cursorUp = false;
             private static bool cursorDown = false;
             private static bool enterPushed = false;
             private int cursorPos = 1;
             private Graphics bg = null;
+            private bool levelFirstTime = true;
             
 
 
@@ -69,16 +71,22 @@ namespace pacman
             {
                 if (showMenu == true)
                 {
-                    this.CreateGraphics();
-                    this.BackColor = Color.Black;
+                    if (updateMenu == true)
+                    {
+                        bg = this.CreateGraphics();
+                        bg.DrawRectangle(new Pen(Color.Black, 1), 0, 0, 500, 500);//.BackColor = Color.Black;
+                        bg.FillRectangle(Brushes.Black, 0, 0, 500, 500);
+                        updateMenu = false;
+                    }
                 }
                 else
                 {
-                    if (bg == null)
+                    if (levelFirstTime == true)
                     {
                         bg = this.CreateGraphics();
                         Bitmap backgroundImage = pacmanSENG403.Properties.Resources.PacmanLayoutWalls;
                         bg.DrawImage(backgroundImage, this.ClientRectangle, new Rectangle(0, 0, 500, 500), GraphicsUnit.Pixel);
+                        levelFirstTime = false;
 
                     }
                 }
@@ -102,43 +110,56 @@ namespace pacman
                     e.Graphics.DrawLine(new Pen(Color.Beige, 1), new Point(500, 0), new Point(0, 0));
 
                     //DRAWING MENU OPTION
-                    e.Graphics.DrawEllipse(new Pen(Color.Yellow, 5), 175, 353, 10, 10);
+                    //e.Graphics.DrawEllipse(new Pen(Color.Yellow, 5), 175, 353, 10, 10);
                     if (firstTime == true)
                     {
                         e.Graphics.DrawEllipse(new Pen(Color.Yellow, 5), 175, 353, 10, 10);
                         firstTime = false;
                         cursorPos = 1;
                     }
-                    if (((keyCheck.KeyCode == Keys.Up) || (keyCheck.KeyCode == Keys.Down)) && !((keyCheck.KeyCode == Keys.Up) && (keyCheck.KeyCode == Keys.Down)))
+                    if (((cursorUp) || (cursorDown)) && !((cursorUp) && (cursorDown)))
                     {
                         //redraw cursor
                         switch (cursorPos)
                         {
                             //case 1: if cursorDown, goto pos2
                             case 1:
-                                if (keyCheck.KeyCode == Keys.Down)
+                                if (cursorDown)
                                 {
                                     cursorPos = 2;
+                                    cursorDown = false;
                                     //erase pos1
                                     e.Graphics.DrawEllipse(new Pen(Color.Black, 5), 175, 353, 10, 10);
                                     //draw pos2
                                     e.Graphics.DrawEllipse(new Pen(Color.Yellow, 5), 175, 383, 10, 10);
                                 }
+                                else if (cursorUp)
+                                {
+                                    cursorPos = 3;
+                                    cursorUp = false;
+                                    //erase pos1
+                                    e.Graphics.DrawEllipse(new Pen(Color.Black, 5), 175, 353, 10, 10);
+                                    //draw pos3
+                                    e.Graphics.DrawEllipse(new Pen(Color.Yellow, 5), 175, 413, 10, 10);
+                                    
+                                }
                                 break;
                             //case 2: if cursorDown, goto pos3
                             //		  if cursorUp, goto pos1
                             case 2:
-                                if (keyCheck.KeyCode == Keys.Down)
+                                if (cursorDown)
                                 {
                                     cursorPos = 3;
+                                    cursorDown = false;
                                     //erase pos2
                                     e.Graphics.DrawEllipse(new Pen(Color.Black, 5), 175, 383, 10, 10);
                                     //draw pos3
                                     e.Graphics.DrawEllipse(new Pen(Color.Yellow, 5), 175, 413, 10, 10);
                                 }
-                                else if (keyCheck.KeyCode == Keys.Up)
+                                else if (cursorUp)
                                 {
                                     cursorPos = 1;
+                                    cursorUp = false;
                                     //erase pos2
                                     e.Graphics.DrawEllipse(new Pen(Color.Black, 5), 175, 383, 10, 10);
                                     //draw pos1
@@ -147,20 +168,39 @@ namespace pacman
                                 break;
                             //case 3: if cursorUp, goto pos2
                             case 3:
-                                if (keyCheck.KeyCode == Keys.Up)
+                                if (cursorUp)
                                 {
                                     cursorPos = 2;
+                                    cursorUp = false;
                                     //erase pos3
                                     e.Graphics.DrawEllipse(new Pen(Color.Black, 5), 175, 413, 10, 10);
                                     //draw pos2
                                     e.Graphics.DrawEllipse(new Pen(Color.Yellow, 5), 175, 383, 10, 10);
+                                }
+                                else if (cursorDown)
+                                {
+                                    cursorPos = 1;
+                                    cursorDown = false;
+                                    //erase pos3
+                                    e.Graphics.DrawEllipse(new Pen(Color.Black, 5), 175, 413, 10, 10);
+                                    //draw pos1
+                                    e.Graphics.DrawEllipse(new Pen(Color.Yellow, 5), 175, 353, 10, 10);
                                 }
                                 break;
                         }
                     }
                     else
                     {
-                        //do nothing -- no cursor
+                        if (enterPushed)
+                        {
+                            if (cursorPos == 1)
+                                showMenu = false;
+                            else if (cursorPos == 2)
+                                this.Close();
+                            else
+                                this.Close();                              
+                            //handle enter being pushed for each cursor position
+                        }
                     }
                 }//end if(showMenu == true)
                 else
@@ -375,6 +415,13 @@ namespace pacman
                     CurrentGameCharacters.pacman.UserInput(e);
                 }
                 else {
+
+                    if(e.KeyCode == Keys.Up)
+                        cursorUp = true;
+                    else if(e.KeyCode == Keys.Down)
+                        cursorDown = true;
+                    else if(e.KeyCode == Keys.Enter)
+                        enterPushed = true;
 
                 }
             }
