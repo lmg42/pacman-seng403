@@ -15,9 +15,6 @@ namespace pacman
 
         private static Thread keyboardInputThread;
         private static KeyEventArgs keyCheck = new KeyEventArgs(new Keys());
-        private static bool debugMenu = true;
-        private static bool debugGame = true;
-
 
         public class AForm : Form
         {
@@ -226,8 +223,11 @@ namespace pacman
 
                         //fruit spawning counter
                         fruitCounter++;
-                        if ((fruitCounter > 700) && (fruitCounter < 2000))
+                        if ((fruitCounter > 700) && (fruitCounter < 2000) && (CurrentGameCharacters.fruit == null))
                         {
+                            CurrentGameCharacters.fruit = new Edibles(250, 250, "fruit");
+                        }
+                        if(CurrentGameCharacters.fruit != null){
                             g_fruit = this.CreateGraphics();
                             g_fruit.DrawEllipse(new Pen(Color.Teal, 6), 250, 250, 1, 1);
                             /*b_fruit = this.CreateGraphics();
@@ -246,6 +246,7 @@ namespace pacman
                             CurrentGameCharacters.pacman = new MyPacman(250, 250);
                             g_pacman = this.CreateGraphics();
                             g_pacman.DrawEllipse(new Pen(Color.Yellow, 12), CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 1, 1);
+                            g_pacman.FillEllipse(Brushes.Yellow, CurrentGameCharacters.pacman.getX(), CurrentGameCharacters.pacman.getY(), 1, 1); 
 
 
                         }
