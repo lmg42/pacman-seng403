@@ -160,7 +160,7 @@ namespace pacman
             //update score, ghosts'status and pacman's status when pacman eats big dot 
             if (DetermineCollisionBetweenPacmanAndBigdots())
             {
-                GameData.incrementScore(100);
+                GameData.incrementScore(90);
                 whenPacmanEatsBigdot = DateTime.Now;
                 CurrentGameCharacters.inky.makeWeak();
                 CurrentGameCharacters.pinky.makeWeak();
