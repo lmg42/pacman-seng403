@@ -365,7 +365,15 @@ namespace pacman
 
             protected override void OnKeyDown(KeyEventArgs e)
             {
-                CurrentGameCharacters.pacman.UserInput(e);
+                if(GameData.gameDone && e.KeyCode == Keys.Enter) {
+                       this.Close();
+                }
+                else if (showMenu == false) {
+                    CurrentGameCharacters.pacman.UserInput(e);
+                }
+                else {
+
+                }
             }
 
             protected static void checkForInput()
