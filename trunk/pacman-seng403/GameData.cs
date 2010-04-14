@@ -74,6 +74,11 @@ namespace pacman
         public Boolean getGameStatus() {
             return gameDone;
         }
+
+        public static void finishedLevels()
+        {
+            gameDone = true;
+        }
         /*
         static void Main() {
         }
