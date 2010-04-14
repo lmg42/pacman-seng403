@@ -206,12 +206,10 @@ namespace pacman
                 else
                 {
 
-                    if (GameData.gameDone)
+                    if (GameData.gameDone && (GameData.level != 5))
                     {
                         e.Graphics.DrawString("GAME OVER", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 200, 200);
-                        e.Graphics.DrawString("Press Enter to Continue", new Font("Ouhod", 12, FontStyle.Regular), Brushes.Yellow, 150, 230);
-                        if (keyCheck.KeyCode == Keys.Enter)
-                            showMenu = true;
+                        e.Graphics.DrawString("Press Enter to Exit", new Font("Ouhod", 12, FontStyle.Regular), Brushes.Yellow, 190, 230);
                     }
 
                     else
@@ -298,7 +296,6 @@ namespace pacman
                             int oldx = CurrentGameCharacters.pacman.getX();
                             int oldy = CurrentGameCharacters.pacman.getY();
                             CurrentGameCharacters.pacman.screenUpdate();
-
 
                             /*g_pacman.DrawRectangle(new Pen(Color.Black, 1), oldx, oldy, 20, 20);
                             g_pacman.FillRectangle(new SolidBrush(Color.Black), oldx, oldy, 20, 20);
@@ -406,6 +403,59 @@ namespace pacman
                             e.Graphics.DrawString("Level " + GameData.level, new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 425, 485);
 
                             GameData.dataUpdate = false;
+                        }
+                        //Go to next level
+                        if (CurrentGameCharacters.pacman.CountAllEdibles() == 1)
+                        {
+                            if (GameData.level == 5)
+                            {
+                                e.Graphics.DrawString("YOU WIN!", new Font("Ouhod", 12, FontStyle.Bold), Brushes.Yellow, 200, 200);
+                                e.Graphics.DrawString("Press Enter to Exit", new Font("Ouhod", 12, FontStyle.Regular), Brushes.Yellow, 190, 230);
+                                GameData.finishedLevels();
+                            }
+                            
+                            GameData.incrementLevel();
+
+                            //reset dots and fruit counter
+                            fruitCounter = 0;
+                            regDots = new RegularDots();
+                            bigDots = new BigDots();
+                            g_largeDot = new Graphics[4];
+                            dotUpdate = 1;
+
+                            //erase ghosts from previous level
+                            g_blinky.DrawEllipse(new Pen(Color.Black, 6), CurrentGameCharacters.blinky.getX(), CurrentGameCharacters.blinky.getY(), 5, 5);
+                            g_pinky.DrawEllipse(new Pen(Color.Black, 6), CurrentGameCharacters.pinky.getX(), CurrentGameCharacters.pinky.getY(), 5, 5);
+                            g_inky.DrawEllipse(new Pen(Color.Black, 6), CurrentGameCharacters.inky.getX(), CurrentGameCharacters.inky.getY(), 5, 5);
+                            g_clyde.DrawEllipse(new Pen(Color.Black, 6), CurrentGameCharacters.clyde.getX(), CurrentGameCharacters.clyde.getY(), 5, 5);
+
+                            //reset ghost positions
+                            CurrentGameCharacters.blinky = new Ghost(1, 1, Directions.UP, false);
+                            g_blinky = this.CreateGraphics();
+                            g_blinky.DrawEllipse(new Pen(Color.Red, 6), CurrentGameCharacters.blinky.getX(), CurrentGameCharacters.blinky.getY(), 5, 5);
+                            
+                            CurrentGameCharacters.pinky = new Ghost(23, 1, Directions.UP, false);
+                            g_pinky = this.CreateGraphics();
+                            g_pinky.DrawEllipse(new Pen(Color.Crimson, 6), CurrentGameCharacters.pinky.getX(), CurrentGameCharacters.pinky.getY(), 5, 5);
+                            
+                            CurrentGameCharacters.inky = new Ghost(23, 23, Directions.UP, false);
+                            g_inky = this.CreateGraphics();
+                            g_inky.DrawEllipse(new Pen(Color.Blue, 6), CurrentGameCharacters.inky.getX(), CurrentGameCharacters.inky.getY(), 5, 5);
+                            
+                            CurrentGameCharacters.clyde = new Ghost(1, 23, Directions.UP, false);
+                            g_clyde = this.CreateGraphics();
+                            g_clyde.DrawEllipse(new Pen(Color.Orange, 6), CurrentGameCharacters.clyde.getX(), CurrentGameCharacters.clyde.getY(), 5, 5);
+                            
+                            //set ghosts as smart depending on the level
+                            if (GameData.level > 1)
+                                CurrentGameCharacters.blinky.makeSmart();
+                            if (GameData.level > 2)
+                                CurrentGameCharacters.pinky.makeSmart();
+                            if (GameData.level > 3)
+                                CurrentGameCharacters.inky.makeSmart();
+                            if (GameData.level > 4)
+                                CurrentGameCharacters.clyde.makeSmart();
+                            
                         }
 
                     }
