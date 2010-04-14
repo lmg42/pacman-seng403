@@ -48,6 +48,8 @@ namespace pacman
             private Graphics[] g_largeDot = new Graphics[4];
             private int dotUpdate = 1;
 
+            private Boolean showHighScores = false;
+
             //Creates basic window - 'Pacman' will be in the title bar, size is Size, and 
             //background colour is black
             public AForm()
@@ -69,13 +71,13 @@ namespace pacman
 
             protected override void OnPaintBackground(PaintEventArgs e)
             {
-                if (showMenu == true)
+                if ((showMenu == true) || (showHighScores == true))
                 {
                     if (updateMenu == true)
                     {
                         bg = this.CreateGraphics();
-                        bg.DrawRectangle(new Pen(Color.Black, 1), 0, 0, 500, 500);//.BackColor = Color.Black;
-                        bg.FillRectangle(Brushes.Black, 0, 0, 500, 500);
+                        bg.DrawRectangle(new Pen(Color.Black, 1), 0, 0, 519, 544);
+                        bg.FillRectangle(Brushes.Black, 0, 0, 519, 544);
                         updateMenu = false;
                     }
                 }
@@ -110,10 +112,9 @@ namespace pacman
                     e.Graphics.DrawLine(new Pen(Color.Beige, 1), new Point(500, 0), new Point(0, 0));
 
                     //DRAWING MENU OPTION
-                    //e.Graphics.DrawEllipse(new Pen(Color.Yellow, 5), 175, 353, 10, 10);
                     if (firstTime == true)
                     {
-                        e.Graphics.DrawEllipse(new Pen(Color.Yellow, 5), 175, 353, 10, 10);
+                        e.Graphics.DrawEllipse(new Pen(Color.Yellow, 8), 175, 353, 7, 7);
                         firstTime = false;
                         cursorPos = 1;
                     }
@@ -129,18 +130,18 @@ namespace pacman
                                     cursorPos = 2;
                                     cursorDown = false;
                                     //erase pos1
-                                    e.Graphics.DrawEllipse(new Pen(Color.Black, 5), 175, 353, 10, 10);
+                                    e.Graphics.DrawEllipse(new Pen(Color.Black, 8), 175, 353, 7, 7);
                                     //draw pos2
-                                    e.Graphics.DrawEllipse(new Pen(Color.Yellow, 5), 175, 383, 10, 10);
+                                    e.Graphics.DrawEllipse(new Pen(Color.Yellow, 8), 175, 383, 7, 7);
                                 }
                                 else if (cursorUp)
                                 {
                                     cursorPos = 3;
                                     cursorUp = false;
                                     //erase pos1
-                                    e.Graphics.DrawEllipse(new Pen(Color.Black, 5), 175, 353, 10, 10);
+                                    e.Graphics.DrawEllipse(new Pen(Color.Black, 8), 175, 353, 7, 7);
                                     //draw pos3
-                                    e.Graphics.DrawEllipse(new Pen(Color.Yellow, 5), 175, 413, 10, 10);
+                                    e.Graphics.DrawEllipse(new Pen(Color.Yellow, 8), 175, 413, 7, 7);
                                     
                                 }
                                 break;
@@ -152,18 +153,18 @@ namespace pacman
                                     cursorPos = 3;
                                     cursorDown = false;
                                     //erase pos2
-                                    e.Graphics.DrawEllipse(new Pen(Color.Black, 5), 175, 383, 10, 10);
+                                    e.Graphics.DrawEllipse(new Pen(Color.Black, 8), 175, 383, 7, 7);
                                     //draw pos3
-                                    e.Graphics.DrawEllipse(new Pen(Color.Yellow, 5), 175, 413, 10, 10);
+                                    e.Graphics.DrawEllipse(new Pen(Color.Yellow, 8), 175, 413, 7, 7);
                                 }
                                 else if (cursorUp)
                                 {
                                     cursorPos = 1;
                                     cursorUp = false;
                                     //erase pos2
-                                    e.Graphics.DrawEllipse(new Pen(Color.Black, 5), 175, 383, 10, 10);
+                                    e.Graphics.DrawEllipse(new Pen(Color.Black, 8), 175, 383, 7, 7);
                                     //draw pos1
-                                    e.Graphics.DrawEllipse(new Pen(Color.Yellow, 5), 175, 353, 10, 10);
+                                    e.Graphics.DrawEllipse(new Pen(Color.Yellow, 8), 175, 353, 7, 7);
                                 }
                                 break;
                             //case 3: if cursorUp, goto pos2
@@ -173,18 +174,18 @@ namespace pacman
                                     cursorPos = 2;
                                     cursorUp = false;
                                     //erase pos3
-                                    e.Graphics.DrawEllipse(new Pen(Color.Black, 5), 175, 413, 10, 10);
+                                    e.Graphics.DrawEllipse(new Pen(Color.Black, 8), 175, 413, 7, 7);
                                     //draw pos2
-                                    e.Graphics.DrawEllipse(new Pen(Color.Yellow, 5), 175, 383, 10, 10);
+                                    e.Graphics.DrawEllipse(new Pen(Color.Yellow, 8), 175, 383, 7, 7);
                                 }
                                 else if (cursorDown)
                                 {
                                     cursorPos = 1;
                                     cursorDown = false;
                                     //erase pos3
-                                    e.Graphics.DrawEllipse(new Pen(Color.Black, 5), 175, 413, 10, 10);
+                                    e.Graphics.DrawEllipse(new Pen(Color.Black, 8), 175, 413, 7, 7);
                                     //draw pos1
-                                    e.Graphics.DrawEllipse(new Pen(Color.Yellow, 5), 175, 353, 10, 10);
+                                    e.Graphics.DrawEllipse(new Pen(Color.Yellow, 8), 175, 353, 7, 7);
                                 }
                                 break;
                         }
@@ -196,13 +197,47 @@ namespace pacman
                             if (cursorPos == 1)
                                 showMenu = false;
                             else if (cursorPos == 2)
-                                this.Close();
+                            {
+                                showHighScores = true;
+                                updateMenu = true;
+                                showMenu = false;
+                            }
                             else
                                 this.Close();                              
                             //handle enter being pushed for each cursor position
                         }
                     }
                 }//end if(showMenu == true)
+                else if (showHighScores == true)
+                {
+                    //draw high scores
+                    Font title = new Font("Purisa", 26);
+                    Font scores = new Font("Ouhod", 16);
+                    e.Graphics.DrawString("High Scores", title, Brushes.Green, 150, 50);
+                    //high score names and scores
+                    e.Graphics.DrawString("Chuck Norris", scores, Brushes.Blue, 50, 150);
+                    e.Graphics.DrawString("1000000", scores, Brushes.Red, 350, 150);
+
+                    e.Graphics.DrawString("Michelangelo", scores, Brushes.Blue, 50, 200);
+                    e.Graphics.DrawString("999990", scores, Brushes.Red, 362, 200);
+
+                    e.Graphics.DrawString("Leonardo", scores, Brushes.Blue, 50, 250);
+                    e.Graphics.DrawString("937280", scores, Brushes.Red, 362, 250);
+
+                    e.Graphics.DrawString("Raphael", scores, Brushes.Blue, 50, 300);
+                    e.Graphics.DrawString("922480", scores, Brushes.Red, 362, 300);
+
+                    e.Graphics.DrawString("Donatello", scores, Brushes.Blue, 50, 350);
+                    e.Graphics.DrawString("900010", scores, Brushes.Red, 362, 350);
+
+                    e.Graphics.DrawString("Sauron", scores, Brushes.Blue, 50, 400);
+                    e.Graphics.DrawString("900000", scores, Brushes.Red, 362, 400);
+
+                    e.Graphics.DrawLine(new Pen(Color.Beige, 1), new Point(0, 0), new Point(0, 500));
+                    e.Graphics.DrawLine(new Pen(Color.Beige, 1), new Point(0, 500), new Point(500, 500));
+                    e.Graphics.DrawLine(new Pen(Color.Beige, 1), new Point(500, 500), new Point(500, 0));
+                    e.Graphics.DrawLine(new Pen(Color.Beige, 1), new Point(500, 0), new Point(0, 0));
+                }//end if(showHighScores == true)
                 else
                 {
 
@@ -248,10 +283,11 @@ namespace pacman
                             }
                             dotUpdate = 0;
                         }
-                        else {
+                        else
+                        {
                             dotUpdate++;
                         }
-                        
+
                         //print big dots
                         for (int i = 0; i < CurrentGameCharacters.bigdots.Count; i++)
                         {
@@ -265,7 +301,8 @@ namespace pacman
                         {
                             CurrentGameCharacters.fruit = new Edibles(250, 250, "fruit");
                         }
-                        if(CurrentGameCharacters.fruit != null){
+                        if (CurrentGameCharacters.fruit != null)
+                        {
                             g_fruit = this.CreateGraphics();
                             g_fruit.DrawEllipse(new Pen(Color.Teal, 6), 250, 250, 1, 1);
                             fruitCounter = 2001;
@@ -409,7 +446,7 @@ namespace pacman
                                 e.Graphics.DrawString("Press Enter to Exit", new Font("Ouhod", 12, FontStyle.Regular), Brushes.Yellow, 190, 230);
                                 GameData.finishedLevels();
                             }
-                            
+
                             GameData.incrementLevel();
 
                             //reset dots and fruit counter
@@ -429,19 +466,19 @@ namespace pacman
                             CurrentGameCharacters.blinky = new Ghost(1, 1, Directions.UP, false);
                             g_blinky = this.CreateGraphics();
                             g_blinky.DrawEllipse(new Pen(Color.Red, 6), CurrentGameCharacters.blinky.getX(), CurrentGameCharacters.blinky.getY(), 5, 5);
-                            
+
                             CurrentGameCharacters.pinky = new Ghost(23, 1, Directions.UP, false);
                             g_pinky = this.CreateGraphics();
                             g_pinky.DrawEllipse(new Pen(Color.Crimson, 6), CurrentGameCharacters.pinky.getX(), CurrentGameCharacters.pinky.getY(), 5, 5);
-                            
+
                             CurrentGameCharacters.inky = new Ghost(23, 23, Directions.UP, false);
                             g_inky = this.CreateGraphics();
                             g_inky.DrawEllipse(new Pen(Color.Blue, 6), CurrentGameCharacters.inky.getX(), CurrentGameCharacters.inky.getY(), 5, 5);
-                            
+
                             CurrentGameCharacters.clyde = new Ghost(1, 23, Directions.UP, false);
                             g_clyde = this.CreateGraphics();
                             g_clyde.DrawEllipse(new Pen(Color.Orange, 6), CurrentGameCharacters.clyde.getX(), CurrentGameCharacters.clyde.getY(), 5, 5);
-                            
+
                             //set ghosts as smart depending on the level
                             if (GameData.level > 1)
                                 CurrentGameCharacters.blinky.makeSmart();
@@ -451,7 +488,7 @@ namespace pacman
                                 CurrentGameCharacters.inky.makeSmart();
                             if (GameData.level > 4)
                                 CurrentGameCharacters.clyde.makeSmart();
-                            
+
                         }
 
                     }
