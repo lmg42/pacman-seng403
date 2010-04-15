@@ -366,7 +366,6 @@ namespace pacman
                 if (fruitFound == true)
                 {
                     CurrentGameCharacters.fruit = null;
-                    numberofEdibles--;
                     return true;
                 }
                 return false;
@@ -376,7 +375,6 @@ namespace pacman
         public int CountAllEdibles()
         {
             int all = 0;
-            all++; //1 fruit
             foreach (Edibles breakfast in CurrentGameCharacters.bigdots)
                 all++;
             foreach (Edibles breakfast in CurrentGameCharacters.dots_bottomleft)
